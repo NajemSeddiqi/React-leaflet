@@ -5,9 +5,9 @@ class Navbar extends Component {
     return (
       <nav className="navbar navbar-light bg-light">
         <a className="navbar-brand" href="#">
-          Navbar
+          Store inspicio
         </a>
-        <span className="badge badge-pill badge-secondary">5</span>
+        <span className="badge badge-pill badge-secondary"></span>
       </nav>
     );
   }

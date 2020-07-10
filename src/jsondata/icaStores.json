@@ -8,7 +8,8 @@
                 "picURL": "http://media.tidningar.sveagruppen.se/sites/2/2015/09/Ica-Gagnefshallen-4096x2723.jpg",
                 "adress": "Tyskens Väg 2, 785 30 Gagnef",
                 "openingHours": "Vardagar: 08-20 Lördag: 08-20 Söndag: 10-20",
-                "website": "https://www.ica.se/butiker/nara/gagnef/ica-nara-gagnefhallen-603/start/"
+                "website": "https://www.ica.se/butiker/nara/gagnef/ica-nara-gagnefhallen-603/start/",
+                "city": "gagnef"
             },
             "geometry": {
                 "type": "Point",
@@ -25,7 +26,8 @@
                 "picURL": "https://bildix.mmcloud.se/bildix/api/images/1SLsj_FMu7Lp9qDGfspKkb12QzY.jpeg?fit=crop&w=1200",
                 "adress": "Södra Industrivägen 8, 785 61 Djurås",
                 "openingHours": "Vardagar: 07-20 Helger: 08-20",
-                "website": "https://www.ica.se/butiker/supermarket/gagnef/ica-supermarket-djuras-606/start/"
+                "website": "https://www.ica.se/butiker/supermarket/gagnef/ica-supermarket-djuras-606/start/",
+                "city": "gagnef"
             },
             "geometry": {
                 "type": "Point",
@@ -42,7 +44,8 @@
                 "picURL": "http://www.babycard.se/assets/images/logotypes/ica-supermarket-kvarnen-1364-bc-bild.1.png",
                 "adress": "Kvarnforsgatan 2, 784 66 Borlänge",
                 "openingHours": "Alla dagar: 08-21",
-                "website": "https://www.ica.se/butiker/supermarket/borlange/ica-supermarket-kvarnen-borlange-657/start/"
+                "website": "https://www.ica.se/butiker/supermarket/borlange/ica-supermarket-kvarnen-borlange-657/start/",
+                "city": "borlänge"
             },
             "geometry": {
                 "type": "Point",
@@ -59,7 +62,8 @@
                 "picURL": "https://kampanj.mittmedia.se/wp-content/uploads/2016/03/icakupolen_nyoppning-640x447.jpg",
                 "adress": "Kupolen 1, 781 70 Borlänge",
                 "openingHours": "Vardagar: 07-22 Helger: 09-22",
-                "website": "https://www.ica.se/butiker/supermarket/borlange/ica-supermarket-kupolen-658/start/"
+                "website": "https://www.ica.se/butiker/supermarket/borlange/ica-supermarket-kupolen-658/start/",
+                "city": "borlänge"
             },
             "geometry": {
                 "type": "Point",
@@ -76,7 +80,8 @@
                 "picURL": "https://www.dagensmedicin.se/contentassets/74b50a2324d443198bc60d9b980f8a81/ica-maxi-umea.jpg?w\u003d260\u0026scale\u003dboth.jpg",
                 "adress": "Bataljonsvägen 11, 791 40 Falun",
                 "openingHours": "Alla dagar: 07-23",
-                "website": "https://www.ica.se/butiker/maxi/falun/maxi-ica-stormarknad-falun-12310/start/"
+                "website": "https://www.ica.se/butiker/maxi/falun/maxi-ica-stormarknad-falun-12310/start/",
+                "city": "falun"
             },
             "geometry": {
                 "type": "Point",
@@ -93,7 +98,8 @@
                 "picURL": "https://bildix.mmcloud.se/bildix/api/images/kR_rfFI_HfF6VviNfrRT432qO-M.jpeg?fit=crop&w=300",
                 "adress": "Jaansvägen 2, 783 50 Gustafs",
                 "openingHours": "Vardagar: 09-20 Helger: 09-18",
-                "website": "https://www.ica.se/butiker/nara/sater/ica-nara-gustafs-674/start/"
+                "website": "https://www.ica.se/butiker/nara/sater/ica-nara-gustafs-674/start/",
+                "city": "säter"
             },
             "geometry": {
                 "type": "Point",
@@ -110,7 +116,8 @@
                 "picURL": "https://bildix.mmcloud.se/bildix/api/images/005fbceb37e034c73807901478cc0a102900958b.jpg?fit=crop&w=300",
                 "adress": "Hyttgatan 5, 776 71 Långshyttan",
                 "openingHours": "Alla dagar: 08-20",
-                "website": "https://www.ica.se/butiker/supermarket/hedemora/ica-supermarket-mathyttan-3570/start/"
+                "website": "https://www.ica.se/butiker/supermarket/hedemora/ica-supermarket-mathyttan-3570/start/",
+                "city": "hedemora"
             },
             "geometry": {
                 "type": "Point",
@@ -127,7 +134,8 @@
                 "picURL": "http://fillit.se/wp-content/uploads/2015/06/unnamed2.jpg",
                 "adress": "Åkargatan 11, 776 30 Hedemora",
                 "openingHours": "Alla dagar: 07-22",
-                "website": "https://www.ica.se/butiker/supermarket/hedemora/ica-supermarket-hedemora-9897/start/"
+                "website": "https://www.ica.se/butiker/supermarket/hedemora/ica-supermarket-hedemora-9897/start/",
+                "city": "hedemora"
             },
             "geometry": {
                 "type": "Point",
@@ -144,7 +152,8 @@
                 "picURL": "http://platverkstan.com/Image/89274/3311/1916/DSC_0448%20(2).JPG",
                 "adress": "Myntgatan 3, 774 30 Avesta",
                 "openingHours": "Alla dagar: 06:30-23",
-                "website": "https://www.ica.se/butiker/kvantum/avesta/ica-kvantum-avesta-13713/start/"
+                "website": "https://www.ica.se/butiker/kvantum/avesta/ica-kvantum-avesta-13713/start/",
+                "city": "avesta"
             },
             "geometry": {
                 "type": "Point",
@@ -161,7 +170,8 @@
                 "picURL": "http://asgarn.se/wp-content/uploads/2014/10/2014-10-17-12.11.18-1024x768.jpg",
                 "adress": "Bruksvägen 14, 774 97 Fors",
                 "openingHours": "Alla dagar: 08-20",
-                "website": "https://www.ica.se/fors/"
+                "website": "https://www.ica.se/fors/",
+                "city": "fors"
             },
             "geometry": {
                 "type": "Point",

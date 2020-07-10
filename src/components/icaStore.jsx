@@ -5,23 +5,37 @@ const Store = ({
   openingHours,
   adress,
   onFlyTo,
+  onEnableTraficDetail,
   coordinates,
   focus,
+  city,
   weather,
+  enabled,
 }) => {
+  let traficClassName = !enabled ? "disabled-traffic" : "enabled-traffic";
+  let titleClassName = !focus ? "unFocused-title" : "focused-title";
   return (
     <div style={{ margin: "5px", padding: "5px", border: "1px red solid" }}>
       {
-        <h3
-          className={focus ? "unFocused-title" : "focused-title"}
-          onClick={() => onFlyTo(coordinates)}
+        <h5
+          className={titleClassName}
+          onClick={() => onFlyTo(coordinates, city)}
         >
           {title}
-        </h3>
+        </h5>
       }
       {<p>{adress}</p>}
       {<p>{openingHours}</p>}
-      {!focus
+      {focus ? (
+        <div className={traficClassName}>
+          <img
+            className="traficImg"
+            src="https://f.nordiskemedier.dk/24lxpprkluqf68lb.jpg"
+            onClick={() => onEnableTraficDetail(city)}
+          />
+        </div>
+      ) : null}
+      {focus
         ? Object.keys(weather)
             .slice(0, 1)
             .map((k, i) => (
@@ -34,11 +48,6 @@ const Store = ({
               </div>
             ))
         : null}
-      {/* {Object.keys(weather).map(k => {
-        return focus ? <div style={{float:"right", margin: "-112px 0px 0px 0px"}}>
-          <span>{weather[k].temp}Hello dadsd</span>
-        </div> : null
-      })} */}
     </div>
   );
 };

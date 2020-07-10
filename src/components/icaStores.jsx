@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Store from "./icaStore";
 
-const Stores = ({ onFlyTo, data, weather }) => {
+const Stores = ({ onFlyTo, data, weather, enabled, onEnableTraficDetail }) => {
   
   return (
     <div>
@@ -13,8 +13,11 @@ const Stores = ({ onFlyTo, data, weather }) => {
           openingHours={s.openingHours}
           adress={s.adress}
           onFlyTo={onFlyTo}
+          onEnableTraficDetail={onEnableTraficDetail}
+          city={s.city}
           coordinates={s.coordinates}
           weather={weather}
+          enabled={enabled}
         />
       ))}
     </div>

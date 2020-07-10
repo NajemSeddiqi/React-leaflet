@@ -12,6 +12,46 @@ code {
     monospace;
 }
 
+.popUpDiv {
+  margin: 5px;
+  padding: 5px;
+}
+
+.storeImg {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 130px;
+  width:200px;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.traficImg {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 50px;
+  width:80px;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.disabled-traffic {
+  float: right;
+  margin: -80px 225px 22px 45px;
+  border: red solid;
+}
+
+.enabled-traffic{
+  float: left;
+  margin: -100px 225px 22px 45px;
+  border: red;
+}
+
 .navbar {
   margin-bottom: 15px;
 }
@@ -51,7 +91,6 @@ code {
   float: right;
   margin-top: -112px;
 }
-
 
 .focused-title {
   text-decoration: underline;
