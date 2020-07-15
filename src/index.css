@@ -22,7 +22,7 @@ code {
   margin-left: auto;
   margin-right: auto;
   height: 130px;
-  width:200px;
+  width: 200px;
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-size: cover;
@@ -33,7 +33,7 @@ code {
   margin-left: auto;
   margin-right: auto;
   height: 50px;
-  width:80px;
+  width: 80px;
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-size: cover;
@@ -42,18 +42,29 @@ code {
 
 .disabled-traffic {
   float: right;
-  margin: -80px 225px 22px 45px;
-  border: red solid;
+  justify-content: space-between;
 }
 
-.enabled-traffic{
+.enabled-traffic {
   float: left;
-  margin: -100px 225px 22px 45px;
-  border: red;
+  justify-content: space-between;
+}
+
+.traficBtns {
+  justify-content: space-between;
 }
 
 .navbar {
   margin-bottom: 15px;
+}
+
+.sideListDiv {
+  margin: 5px;
+  padding: 5px;
+  border: 1px red solid;
+  display: flex;
+  overflow: hidden;
+  justify-content: space-between;
 }
 
 .sideList {
@@ -89,7 +100,7 @@ code {
 
 .weather-div {
   float: right;
-  margin-top: -112px;
+  /* margin-top: -112px; */
 }
 
 .focused-title {

@@ -17,7 +17,9 @@ class MyMap extends Component {
     data: [],
     weather: {},
     trafic: [],
+    enabled: false,
   };
+
   map = createRef();
 
   async componentDidMount() {
@@ -49,15 +51,17 @@ class MyMap extends Component {
       trafic: this.getTraficInformation(city).then((trafic) =>
         this.setState({ trafic })
       ),
+      enabled: false,
     }));
     this.map.current.leafletElement.flyTo(coordinates, 13);
   };
 
-  handleEnableTraficDetail = (traficClassName) => {
-    const trafic = [...this.state.trafic];
-    
-    console.log(traficClassName);
-    console.log(this.state.trafic);
+  handleEnableTraficDetail = async () => {
+    this.setState({ enabled: true });
+  };
+
+  handleDisableTraficDetail = () => {
+    this.setState({ enabled: false });
   };
 
   getWeather = async (coordinates) => {
@@ -89,8 +93,7 @@ class MyMap extends Component {
   };
 
   render() {
-    const { data, weather } = this.state;
-    const { enabled } = this.state.trafic;
+    const { data, weather, trafic, enabled } = this.state;
     return (
       <div className="mapAndList">
         <div className="sideList">
@@ -100,6 +103,7 @@ class MyMap extends Component {
             enabled={enabled}
             onFlyTo={this.handleFlyTo}
             onEnableTraficDetail={this.handleEnableTraficDetail}
+            onDisableTraficDetail={this.handleDisableTraficDetail}
           />
         </div>
         <div className="leaflet-container">
@@ -139,6 +143,11 @@ class MyMap extends Component {
                 </Popup>
               </Marker>
             ))}
+            {enabled
+              ? trafic.map((pos, idx) => (
+                  <Marker key={idx} position={pos.coordinates}></Marker>
+                ))
+              : null}
           </Map>
         </div>
       </div>

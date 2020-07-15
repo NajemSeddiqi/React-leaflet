@@ -6,6 +6,7 @@ const Store = ({
   adress,
   onFlyTo,
   onEnableTraficDetail,
+  onDisableTraficDetail,
   coordinates,
   focus,
   city,
@@ -15,24 +16,26 @@ const Store = ({
   let traficClassName = !enabled ? "disabled-traffic" : "enabled-traffic";
   let titleClassName = !focus ? "unFocused-title" : "focused-title";
   return (
-    <div style={{ margin: "5px", padding: "5px", border: "1px red solid" }}>
-      {
-        <h5
-          className={titleClassName}
-          onClick={() => onFlyTo(coordinates, city)}
-        >
-          {title}
-        </h5>
-      }
-      {<p>{adress}</p>}
-      {<p>{openingHours}</p>}
+    <div className="sideListDiv">
+      <div>
+        {
+          <h5 className={titleClassName} onClick={() => onFlyTo(coordinates, city)}>
+            {title}
+          </h5>
+        }
+        {<p>{adress}</p>}
+        {<p>{openingHours}</p>}
+      </div>
       {focus ? (
         <div className={traficClassName}>
           <img
             className="traficImg"
             src="https://f.nordiskemedier.dk/24lxpprkluqf68lb.jpg"
-            onClick={() => onEnableTraficDetail(city)}
           />
+          <div className="traficBtns"> 
+          <button className="btn-primary" onClick={() => onEnableTraficDetail(city)}>On</button>
+          <button className="btn-primary" onClick={() => onDisableTraficDetail(city)}>Off</button>
+          </div>
         </div>
       ) : null}
       {focus
