@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Store from "./icaStore";
+import Store from "./store";
 
 const Stores = ({ onFlyTo, data, weather, enabled, onEnableTraficDetail, onDisableTraficDetail }) => {
   

@@ -28,6 +28,44 @@ code {
   background-size: cover;
 }
 
+.traficButtonDisabled {
+  display: inline-block;
+  padding: 0.3em 1.2em;
+  margin: 0 0.3em 0.3em 0.2em;
+  border-radius: 2em;
+  box-sizing: border-box;
+  text-decoration:none;
+  font-family:'Roboto',sans-serif;
+  font-weight:300;
+  color:#080808;
+  background-color:#83392c;
+  text-align:center;
+  transition: all 0.2s;
+}
+
+.traficButtonEnabled {
+  display: inline-block;
+  padding: 0.3em 1.2em;
+  margin: 0 0.3em 0.3em 0.2em;
+  border-radius: 2em;
+  box-sizing: border-box;
+  text-decoration:none;
+  font-family:'Roboto',sans-serif;
+  font-weight:300;
+  color:#FFFFFF;
+  background-color:#4eb5f1;
+  text-align:center;
+  transition: all 0.2s;
+}
+
+.traficButtonEnabled:hover {
+  background-color: #4095c6;
+}
+
+.traficButtonDisabled:hover {
+  background-color: #811d1d;
+}
+
 .traficImg {
   display: block;
   margin-left: auto;
@@ -37,7 +75,6 @@ code {
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-size: cover;
-  cursor: pointer;
 }
 
 .disabled-traffic {

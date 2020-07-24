@@ -1,16 +1,14 @@
 import React, { Component } from "react";
-import {
-  Map,
-  Marker,
-  Popup,
-  TileLayer,
-  ZoomControl,
-  ScaleControl,
-} from "react-leaflet";
+import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 import { createRef } from "react";
-import http from "../services/httpService";
-import Stores from "./icaStores";
+import L from "leaflet";
 import getIcaStores from "../jsondata/icaStores.json";
+import http from "../services/httpService";
+import Stores from "./stores";
+import redIcon from "../common/redIcon.png";
+import bussIcon from "../common/bussStopIcon.png";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 class MyMap extends Component {
   state = {
@@ -38,7 +36,7 @@ class MyMap extends Component {
     this.setState({ data });
   }
 
-  handleFlyTo = (coordinates, city) => {
+  handleFlyTo = (coordinates) => {
     this.setState((prevState) => ({
       data: prevState.data.map((i) =>
         i.coordinates === coordinates
@@ -48,7 +46,7 @@ class MyMap extends Component {
       weather: this.getWeather(coordinates).then((weather) =>
         this.setState({ weather })
       ),
-      trafic: this.getTraficInformation(city).then((trafic) =>
+      trafic: this.getTraficInformation(coordinates).then((trafic) =>
         this.setState({ trafic })
       ),
       enabled: false,
@@ -56,44 +54,55 @@ class MyMap extends Component {
     this.map.current.leafletElement.flyTo(coordinates, 13);
   };
 
-  handleEnableTraficDetail = async () => {
-    this.setState({ enabled: true });
-  };
-
-  handleDisableTraficDetail = () => {
-    this.setState({ enabled: false });
+  handleEnableTraficDetail = () => {
+    if (this.state.trafic === undefined || this.state.trafic === undefined) {
+      toast.error("Det finns för närvarande inga tillgängliga hållplatser.");
+    } else {
+      this.setState({ enabled: !this.state.enabled }); 
+    }
   };
 
   getWeather = async (coordinates) => {
     const [lat, lng] = coordinates;
     const url = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&units=metric&appid=25f4530d6bd98eb444ce6b94f8db1ef8`;
     const { data } = await http.get(url);
-    const obj = {
-      id: data.id,
-      temp: data.main.temp,
-      humidity: data.main.humidity,
-      description: data.weather[0].description,
-      icon: data.weather[0].icon,
-      enabled: false,
-    };
-    return obj;
+    try {
+      const obj = {
+        id: data.id,
+        temp: data.main.temp,
+        humidity: data.main.humidity,
+        description: data.weather[0].description,
+        icon: data.weather[0].icon,
+        enabled: false,
+      };
+      return obj;
+    } catch (ex) {}
   };
 
-  getTraficInformation = async (location) => {
-    let url = `https://api.resrobot.se/v2/location.name?key=c4b5de66-b9c7-471f-86cc-289685544c58&input=${location}?&format=json`;
+  getTraficInformation = async (coordinates) => {
+    let [lat, lng] = coordinates;
+    let url = `https://api.resrobot.se/v2/location.nearbystops?key=c4b5de66-b9c7-471f-86cc-289685544c58&originCoordLat=${lat}&originCoordLong=${lng}&format=json`;
     const { data } = await http.get(url);
-    const trafic = data.StopLocation.map((t) => ({
-      id: t.id,
-      name: t.name,
-      coordinates: [t.lat, t.lon],
-      products: t.products,
-      weight: t.weight,
-    }));
-    return trafic;
+    try {
+      const trafic = data.StopLocation.map((t) => ({
+        id: t.id,
+        name: t.name,
+        coordinates: [t.lat, t.lon],
+        products: t.products,
+        weight: t.weight,
+      }));
+      return trafic;
+    } catch (ex) {}
   };
 
   render() {
     const { data, weather, trafic, enabled } = this.state;
+    const storeIcon = L.icon({
+      iconUrl: redIcon,
+      iconSize: [38, 42],
+    });
+    const bussStopIcon = L.icon({ iconUrl: bussIcon, iconSize: [30, 35] });
+
     return (
       <div className="mapAndList">
         <div className="sideList">
@@ -109,15 +118,11 @@ class MyMap extends Component {
         <div className="leaflet-container">
           <Map ref={this.map} center={[60.50274, 15.41921]} zoom={8}>
             <TileLayer
-              attribution={this.state.weather["temp"]}
-              url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
-            />
-            <TileLayer
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
             />
             {data.map((pos, idx) => (
-              <Marker key={idx} position={pos.coordinates}>
+              <Marker key={idx} position={pos.coordinates} icon={storeIcon}>
                 <Popup>
                   <div className="popUpDiv">
                     <img className="storeImg" src={pos.picUrl} />
@@ -143,9 +148,13 @@ class MyMap extends Component {
                 </Popup>
               </Marker>
             ))}
-            {enabled
+            {enabled && trafic !== undefined
               ? trafic.map((pos, idx) => (
-                  <Marker key={idx} position={pos.coordinates}></Marker>
+                  <Marker
+                    key={idx}
+                    position={pos.coordinates}
+                    icon={bussStopIcon}
+                  ></Marker>
                 ))
               : null}
           </Map>
