@@ -6,7 +6,6 @@ const Store = ({
   adress,
   onFlyTo,
   onEnableTraficDetail,
-  onDisableTraficDetail,
   coordinates,
   focus,
   weather,
@@ -37,7 +36,7 @@ const Store = ({
       {focus
         ? Object.keys(weather)
             .slice(0, 1)
-            .map((k, i) => (
+            .map(() => (
               <div className="weather-div">
                 <span>{`${weather["temp"]}°`}</span>
                 <p>{weather["description"]}</p>

@@ -38,7 +38,7 @@ code {
   font-family:'Roboto',sans-serif;
   font-weight:300;
   color:#080808;
-  background-color:#83392c;
+  background-color:#4eb5f1;
   text-align:center;
   transition: all 0.2s;
 }
@@ -63,7 +63,7 @@ code {
 }
 
 .traficButtonDisabled:hover {
-  background-color: #811d1d;
+  background-color: #4095c6;
 }
 
 .traficImg {

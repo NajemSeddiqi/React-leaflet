@@ -14,7 +14,6 @@ const Stores = ({ onFlyTo, data, weather, enabled, onEnableTraficDetail, onDisab
           adress={s.adress}
           onFlyTo={onFlyTo}
           onEnableTraficDetail={onEnableTraficDetail}
-          onDisableTraficDetail={onDisableTraficDetail}
           city={s.city}
           coordinates={s.coordinates}
           weather={weather}

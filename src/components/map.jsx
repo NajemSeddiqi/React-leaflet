@@ -1,20 +1,22 @@
 import React, { Component } from "react";
 import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 import { createRef } from "react";
+import { toast } from "react-toastify";
 import L from "leaflet";
 import getIcaStores from "../jsondata/icaStores.json";
 import http from "../services/httpService";
 import Stores from "./stores";
 import redIcon from "../common/redIcon.png";
 import bussIcon from "../common/bussStopIcon.png";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import bussAvailableIcon from "../common/bussAvailable.png";
+import bussUnavailableIcon from "../common/bussUnavailable.png";
 
 class MyMap extends Component {
   state = {
     data: [],
     weather: {},
     trafic: [],
+    departures: [],
     enabled: false,
   };
 
@@ -55,10 +57,10 @@ class MyMap extends Component {
   };
 
   handleEnableTraficDetail = () => {
-    if (this.state.trafic === undefined || this.state.trafic === undefined) {
+    if (this.state.trafic === undefined) {
       toast.error("Det finns för närvarande inga tillgängliga hållplatser.");
     } else {
-      this.setState({ enabled: !this.state.enabled }); 
+      this.setState({ enabled: !this.state.enabled });
     }
   };
 
@@ -95,12 +97,25 @@ class MyMap extends Component {
     } catch (ex) {}
   };
 
+  handleDepartureData = async (id) => {
+    let url = `https://api.resrobot.se/v2/departureBoard?key=6e22f881-8d86-4669-8c8d-3eddc81c36c9&id=${id}&maxJourneys=5&format=json`;
+    const { data } = await http.get(url);
+    try {
+      const departures = data.Departure.map((d) => ({
+        operator: d.Product.operator,
+        date: d.date,
+        time: d.time,
+        transportNumber: d.transportNumber,
+        stopId: d.stopid,
+      }));
+      this.setState({ departures });
+      console.log(departures);
+    } catch (ex) {}
+  };
+
   render() {
-    const { data, weather, trafic, enabled } = this.state;
-    const storeIcon = L.icon({
-      iconUrl: redIcon,
-      iconSize: [38, 42],
-    });
+    const { data, weather, trafic, departures, enabled } = this.state;
+    const storeIcon = L.icon({ iconUrl: redIcon, iconSize: [38, 42] });
     const bussStopIcon = L.icon({ iconUrl: bussIcon, iconSize: [30, 35] });
 
     return (
@@ -112,7 +127,6 @@ class MyMap extends Component {
             enabled={enabled}
             onFlyTo={this.handleFlyTo}
             onEnableTraficDetail={this.handleEnableTraficDetail}
-            onDisableTraficDetail={this.handleDisableTraficDetail}
           />
         </div>
         <div className="leaflet-container">
@@ -154,7 +168,28 @@ class MyMap extends Component {
                     key={idx}
                     position={pos.coordinates}
                     icon={bussStopIcon}
-                  ></Marker>
+                    onclick={() => this.handleDepartureData(pos.id)}
+                  >
+                    <Popup>
+                      {departures.length > 0 ? (
+                        departures.slice(0, 1).map((d) => (
+                          <div className="popUpDiv">
+                            <img src={bussAvailableIcon} style={{display: "block", marginLeft: "auto", marginRight: "auto"}}/> <br /><br />
+                            <span>
+                              Nästa buss går {d.date} klockan {d.time}
+                            </span>
+                          </div>
+                        ))
+                      ) : (
+                        <div className="popUpDiv">
+                          <img src={bussUnavailableIcon}  style={{display: "block", marginLeft: "auto", marginRight: "auto"}} /> <br /><br />
+                          <span>
+                            Det finns inga tilgängliga anländningtider just nu.
+                          </span>
+                        </div>
+                      )}
+                    </Popup>
+                  </Marker>
                 ))
               : null}
           </Map>
