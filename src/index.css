@@ -13,8 +13,34 @@ code {
 }
 
 .popUpDiv {
-  margin: 5px;
-  padding: 5px;
+  margin: 0 auto;
+  padding: auto;
+}
+
+.departurePopUpBtn {
+  display: inline-block;
+  padding: 0.3em 1.2em;
+  margin: 0 0.3em 0.3em 0.2em;
+  border-radius: 2em;
+  box-sizing: border-box;
+  text-decoration:none;
+  font-family:'Roboto',sans-serif;
+  font-weight:300;
+  color:#080808;
+  background-color:#4eb5f1;
+  text-align:center;
+  transition: all 0.2s;
+}
+
+.departurePopUpBtn:hover {
+  background-color: #4095c6;
+}
+
+.departurePopUpBtns {
+  display: flex;
+  margin: auto;
+  padding: auto;
+  justify-content: space-around;
 }
 
 .storeImg {
@@ -153,3 +179,52 @@ code {
 .clickable {
   cursor: pointer;
 }
+
+.toolTip {
+  position: relative;
+  display: block;
+}
+
+.toolTip ul {
+  opacity: 0.8;
+  left: 100%;
+  padding-left: -80px;
+  margin-left: 15px;
+  width:100px;
+  color: #FFFFFF;
+  background: #000000;
+  position: absolute;
+  height:auto;
+  line-height: 15px;
+  text-align: center;
+  visibility: visible;
+  border-radius: 6px;
+  box-shadow: 0px 0px 0px #800000;
+  justify-content: center;
+}
+
+.toolTip ul::after { 
+  /* content creates the little arrow pointing from the starting position */
+  content: '';
+  position: absolute;
+  top: 18%;
+  right: 100%;
+  margin-top: -8px;
+  margin-left: auto;
+  width: 0; height: 0;
+  border-right: 8px solid #000000;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+}
+
+.toolTip ul:hover {
+  visibility: visible;
+  opacity: 0.8;
+  left: 100%;
+  top: 50%;
+  margin-top: -NaNpx;
+  margin-left: 15px;
+  z-index: 999;
+}
+
+

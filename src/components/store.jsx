@@ -14,8 +14,8 @@ const Store = ({
   let titleClassName = !focus ? "unFocused-title" : "focused-title";
   let traficButtonClassName = !enabled ? "traficButtonDisabled" : "traficButtonEnabled";
   return (
-    <div className="sideListDiv">
-      <div>
+    <div key={title} className="sideListDiv">
+      <div key={title}>
         {
           <h5 className={titleClassName} onClick={() => onFlyTo(coordinates)}>
             {title}

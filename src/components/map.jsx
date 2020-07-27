@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 import { createRef } from "react";
 import { toast } from "react-toastify";
-import L from "leaflet";
+import L, { popup } from "leaflet";
 import getIcaStores from "../jsondata/icaStores.json";
 import http from "../services/httpService";
 import Stores from "./stores";
@@ -18,6 +18,8 @@ class MyMap extends Component {
     trafic: [],
     departures: [],
     enabled: false,
+    index: 0,
+    isHovering: false,
   };
 
   map = createRef();
@@ -34,7 +36,6 @@ class MyMap extends Component {
       city: s.properties.city,
       coordinates: s.geometry.coordinates.reverse(),
     }));
-
     this.setState({ data });
   }
 
@@ -52,6 +53,7 @@ class MyMap extends Component {
         this.setState({ trafic })
       ),
       enabled: false,
+      index: 0,
     }));
     this.map.current.leafletElement.flyTo(coordinates, 13);
   };
@@ -113,8 +115,32 @@ class MyMap extends Component {
     } catch (ex) {}
   };
 
+  handleSpanTimeTouch = () => {
+    this.setState((prevState) => ({ isHovering: !prevState.isHovering }));
+  };
+
+  handleNextDeparture = () => {
+    const { index, departures } = this.state;
+    if (index === departures.length - 1) return;
+    this.setState((prevState) => ({ index: prevState.index + 1 }));
+  };
+
+  handlePrevDeparture = () => {
+    const { index } = this.state;
+    if (index === 0) return;
+    this.setState((prevState) => ({ index: prevState.index - 1 }));
+  };
+
   render() {
-    const { data, weather, trafic, departures, enabled } = this.state;
+    const {
+      data,
+      weather,
+      trafic,
+      departures,
+      enabled,
+      index,
+      isHovering,
+    } = this.state;
     const storeIcon = L.icon({ iconUrl: redIcon, iconSize: [38, 42] });
     const bussStopIcon = L.icon({ iconUrl: bussIcon, iconSize: [30, 35] });
 
@@ -171,18 +197,65 @@ class MyMap extends Component {
                     onclick={() => this.handleDepartureData(pos.id)}
                   >
                     <Popup>
-                      {departures.length > 0 ? (
-                        departures.slice(0, 1).map((d) => (
-                          <div className="popUpDiv">
-                            <img src={bussAvailableIcon} style={{display: "block", marginLeft: "auto", marginRight: "auto"}}/> <br /><br />
-                            <span>
-                              Nästa buss går {d.date} klockan {d.time}
-                            </span>
+                      {departures.length > 0 ||
+                      departures[index] !== undefined ? (
+                        <div className="popUpDiv">
+                          <img
+                            src={bussAvailableIcon}
+                            style={{
+                              display: "block",
+                              marginLeft: "auto",
+                              marginRight: "auto",
+                            }}
+                          />{" "}
+                          <br />
+                          <br />
+                          {isHovering ? (
+                            <div className="toolTip">
+                              <ul>
+                              {departures.map((d) => (
+                                <li className="toolTip">{d.time}</li>
+                              ))}
+                              </ul>
+                            </div>
+                          ) : null}
+                          <span>
+                            Nästa buss går {departures[index]["date"]} klockan{" "}
+                            <b
+                              onMouseEnter={this.handleSpanTimeTouch}
+                              onMouseLeave={this.handleSpanTimeTouch}
+                            >
+                              {departures[index]["time"]}
+                            </b>
+                          </span>
+                          <br />
+                          <div className="departurePopUpBtns">
+                            <button
+                              className="departurePopUpBtn"
+                              onClick={() => this.handlePrevDeparture()}
+                            >
+                              Föregående
+                            </button>
+                            <button
+                              className="departurePopUpBtn"
+                              onClick={() => this.handleNextDeparture()}
+                            >
+                              Nästa
+                            </button>
                           </div>
-                        ))
+                        </div>
                       ) : (
                         <div className="popUpDiv">
-                          <img src={bussUnavailableIcon}  style={{display: "block", marginLeft: "auto", marginRight: "auto"}} /> <br /><br />
+                          <img
+                            src={bussUnavailableIcon}
+                            style={{
+                              display: "block",
+                              marginLeft: "auto",
+                              marginRight: "auto",
+                            }}
+                          />{" "}
+                          <br />
+                          <br />
                           <span>
                             Det finns inga tilgängliga anländningtider just nu.
                           </span>

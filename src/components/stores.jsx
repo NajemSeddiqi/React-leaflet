@@ -8,7 +8,7 @@ const Stores = ({ onFlyTo, data, weather, enabled, onEnableTraficDetail, onDisab
       {data.map((s, idx) => (
         <Store
           focus={s.focused}
-          key={s.store}
+          key={idx}
           title={s.store}
           openingHours={s.openingHours}
           adress={s.adress}
