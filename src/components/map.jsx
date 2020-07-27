@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 import { createRef } from "react";
 import { toast } from "react-toastify";
-import L, { popup } from "leaflet";
+import L from "leaflet";
 import getIcaStores from "../jsondata/icaStores.json";
 import http from "../services/httpService";
 import Stores from "./stores";
