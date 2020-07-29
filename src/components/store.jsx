@@ -1,4 +1,4 @@
-import React, { Component, createRef } from "react";
+import React from "react";
 
 const Store = ({
   title,
@@ -12,7 +12,9 @@ const Store = ({
   enabled,
 }) => {
   let titleClassName = !focus ? "unFocused-title" : "focused-title";
-  let traficButtonClassName = !enabled ? "traficButtonDisabled" : "traficButtonEnabled";
+  let traficButtonClassName = !enabled
+    ? "traficButtonDisabled"
+    : "traficButtonEnabled";
   return (
     <div key={title} className="sideListDiv">
       <div key={title}>
@@ -24,28 +26,32 @@ const Store = ({
         {<p>{adress}</p>}
         {<p>{openingHours}</p>}
       </div>
-      {focus ? (
+      {focus && (
         <div>
           <img
             className="traficImg"
             src="https://f.nordiskemedier.dk/24lxpprkluqf68lb.jpg"
           />
-          <button className={traficButtonClassName} onClick={() => onEnableTraficDetail()}>Hållplatser</button>
+          <button
+            className={traficButtonClassName}
+            onClick={() => onEnableTraficDetail()}
+          >
+            Hållplatser
+          </button>
         </div>
-      ) : null}
-      {focus
-        ? Object.keys(weather)
-            .slice(0, 1)
-            .map(() => (
-              <div className="weather-div">
-                <span>{`${weather["temp"]}°`}</span>
-                <p>{weather["description"]}</p>
-                <img
-                  src={`http://openweathermap.org/img/w/${weather["icon"]}.png`}
-                ></img>
-              </div>
-            ))
-        : null}
+      )}
+      {focus &&
+        Object.keys(weather)
+          .slice(0, 1)
+          .map(() => (
+            <div className="weather-div">
+              <span>{`${weather["temp"]}°`}</span>
+              <p>{weather["description"]}</p>
+              <img
+                src={`http://openweathermap.org/img/w/${weather["icon"]}.png`}
+              ></img>
+            </div>
+          ))}
     </div>
   );
 };

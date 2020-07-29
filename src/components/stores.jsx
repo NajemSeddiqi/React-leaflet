@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import Store from "./store";
 
-const Stores = ({ onFlyTo, data, weather, enabled, onEnableTraficDetail, onDisableTraficDetail }) => {
+const Stores = ({ onFlyTo, data, weather, enabled, onEnableTraficDetail}) => {
   
   return (
     <div>

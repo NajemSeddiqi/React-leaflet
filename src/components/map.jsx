@@ -2,24 +2,18 @@ import React, { Component } from "react";
 import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 import { createRef } from "react";
 import { toast } from "react-toastify";
-import L from "leaflet";
 import getIcaStores from "../jsondata/icaStores.json";
 import http from "../services/httpService";
 import Stores from "./stores";
-import redIcon from "../common/redIcon.png";
-import bussIcon from "../common/bussStopIcon.png";
-import bussAvailableIcon from "../common/bussAvailable.png";
-import bussUnavailableIcon from "../common/bussUnavailable.png";
+import StoreMarkers from "./storeMarkers";
+import BussStopMarkers from "./bussStopMarkers";
 
 class MyMap extends Component {
   state = {
     data: [],
     weather: {},
     trafic: [],
-    departures: [],
-    enabled: false,
-    index: 0,
-    isHovering: false,
+    enabled: false,   
   };
 
   map = createRef();
@@ -53,8 +47,8 @@ class MyMap extends Component {
         this.setState({ trafic })
       ),
       enabled: false,
-      index: 0,
     }));
+    this.map.current.leafletElement.closePopup();
     this.map.current.leafletElement.flyTo(coordinates, 13);
   };
 
@@ -99,54 +93,18 @@ class MyMap extends Component {
     } catch (ex) {}
   };
 
-  handleDepartureData = async (id) => {
-    let url = `https://api.resrobot.se/v2/departureBoard?key=6e22f881-8d86-4669-8c8d-3eddc81c36c9&id=${id}&maxJourneys=5&format=json`;
-    const { data } = await http.get(url);
-    try {
-      const departures = data.Departure.map((d) => ({
-        operator: d.Product.operator,
-        date: d.date,
-        time: d.time,
-        transportNumber: d.transportNumber,
-        stopId: d.stopid,
-      }));
-      this.setState({ departures });
-      console.log(departures);
-    } catch (ex) {}
-  };
-
-  handleSpanTimeTouch = () => {
-    this.setState((prevState) => ({ isHovering: !prevState.isHovering }));
-  };
-
-  handleNextDeparture = () => {
-    const { index, departures } = this.state;
-    if (index === departures.length - 1) return;
-    this.setState((prevState) => ({ index: prevState.index + 1 }));
-  };
-
-  handlePrevDeparture = () => {
-    const { index } = this.state;
-    if (index === 0) return;
-    this.setState((prevState) => ({ index: prevState.index - 1 }));
-  };
-
   render() {
     const {
       data,
       weather,
       trafic,
-      departures,
       enabled,
-      index,
-      isHovering,
     } = this.state;
-    const storeIcon = L.icon({ iconUrl: redIcon, iconSize: [38, 42] });
-    const bussStopIcon = L.icon({ iconUrl: bussIcon, iconSize: [30, 35] });
 
     return (
       <div className="mapAndList">
         <div className="sideList">
+          {/* sfc */}
           <Stores
             data={data}
             weather={weather}
@@ -161,110 +119,13 @@ class MyMap extends Component {
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
             />
-            {data.map((pos, idx) => (
-              <Marker key={idx} position={pos.coordinates} icon={storeIcon}>
-                <Popup>
-                  <div className="popUpDiv">
-                    <img className="storeImg" src={pos.picUrl} />
-                    <br />
-                    <span>
-                      <b>Adress: </b>
-                      {pos.store}
-                    </span>
-                    <br />
-                    <span>
-                      <b>Öppettider: </b>
-                      {pos.openingHours}
-                    </span>
-                    <br />
-                    <br />
-                    <span>
-                      <b>Hemsida: </b>
-                    </span>
-                    <a href={pos.website} target="_blank">
-                      Klicka här
-                    </a>
-                  </div>
-                </Popup>
-              </Marker>
-            ))}
-            {enabled && trafic !== undefined
-              ? trafic.map((pos, idx) => (
-                  <Marker
-                    key={idx}
-                    position={pos.coordinates}
-                    icon={bussStopIcon}
-                    onclick={() => this.handleDepartureData(pos.id)}
-                  >
-                    <Popup>
-                      {departures.length > 0 ||
-                      departures[index] !== undefined ? (
-                        <div className="popUpDiv">
-                          <img
-                            src={bussAvailableIcon}
-                            style={{
-                              display: "block",
-                              marginLeft: "auto",
-                              marginRight: "auto",
-                            }}
-                          />{" "}
-                          <br />
-                          <br />
-                          {isHovering ? (
-                            <div className="toolTip">
-                              <ul>
-                              {departures.map((d) => (
-                                <li className="toolTip">{d.time}</li>
-                              ))}
-                              </ul>
-                            </div>
-                          ) : null}
-                          <span>
-                            Nästa buss går {departures[index]["date"]} klockan{" "}
-                            <b
-                              onMouseEnter={this.handleSpanTimeTouch}
-                              onMouseLeave={this.handleSpanTimeTouch}
-                            >
-                              {departures[index]["time"]}
-                            </b>
-                          </span>
-                          <br />
-                          <div className="departurePopUpBtns">
-                            <button
-                              className="departurePopUpBtn"
-                              onClick={() => this.handlePrevDeparture()}
-                            >
-                              Föregående
-                            </button>
-                            <button
-                              className="departurePopUpBtn"
-                              onClick={() => this.handleNextDeparture()}
-                            >
-                              Nästa
-                            </button>
-                          </div>
-                        </div>
-                      ) : (
-                        <div className="popUpDiv">
-                          <img
-                            src={bussUnavailableIcon}
-                            style={{
-                              display: "block",
-                              marginLeft: "auto",
-                              marginRight: "auto",
-                            }}
-                          />{" "}
-                          <br />
-                          <br />
-                          <span>
-                            Det finns inga tilgängliga anländningtider just nu.
-                          </span>
-                        </div>
-                      )}
-                    </Popup>
-                  </Marker>
-                ))
-              : null}
+            {/* Sfc */}
+            <StoreMarkers data={data} />
+            {/* Component class because it exceeded three methods and definitely required a state */}
+            <BussStopMarkers
+              enabled={enabled}
+              trafic={trafic}
+            />
           </Map>
         </div>
       </div>
