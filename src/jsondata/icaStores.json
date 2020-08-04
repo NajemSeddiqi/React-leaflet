@@ -180,6 +180,78 @@
                     60.22636
                 ]
             }
-        }
-    ]
+        },
+         {
+      "type": "Feature",
+      "properties": {
+        "store": "Ica Supermarket",
+        "picURL": "",
+        "adress": "Långgatan 19, 828 32 Edsbyn",
+        "openingHours": "Vardagar: 08-21 Lör: 08:21 Sön: 10:21",
+        "website": "https://www.ica.se/butiker/supermarket/ovanaker/ica-supermarket-edsbyn-698/start/",
+        "city": "Edsbyn"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          15.817329883575438,
+          61.37644941671796
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "store": "Ica Supermarket",
+        "picURL": "",
+        "adress": "Långgatan 54, 822 30 Alfta",
+        "openingHours": "Alla dagar: 08-21",
+        "website": "https://www.ica.se/butiker/supermarket/ovanaker/ica-supermarket-alfta-704/start/",
+        "city": "Alfta"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          16.064329147338867,
+          61.345272018699305
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "store": "Ica Supermarket Järvsö",
+        "picURL": "",
+        "adress": "Turistvägen 45, 820 40 Järvsö",
+        "openingHours": "Alla dagar: 08-21",
+        "website": "https://www.ica.se/butiker/supermarket/ljusdal/ica-supermarket-jarvso-711/start/",
+        "city": "Järvsö"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          16.169525384902954,
+          61.71774231077379
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "store": "Ica Maxi Supermarket Hudiksvall",
+        "picURL": "",
+        "adress": "Blockvägen 1, 824 34 Hudiksvall",
+        "openingHours": "Alla dagar: 07-22",
+        "website": "https://www.ica.se/butiker/maxi/hudiksvall/maxi-ica-stormarknad-hudiksvall-394/start/",
+        "city": "Hudiksvall"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          17.116398811340332,
+          61.742956266560114
+        ]
+      }
+    }
+  ]
 }

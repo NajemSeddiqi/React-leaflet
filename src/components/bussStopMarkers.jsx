@@ -64,6 +64,7 @@ class BussStopMarkers extends Component {
                 {departures.length > 0 && departures[index] !== undefined ? (
                   <div className="popUpDiv">
                     <img
+                      alt=""
                       src={bussAvailableIcon}
                       style={{
                         display: "block",
@@ -76,8 +77,8 @@ class BussStopMarkers extends Component {
                     {isHovering && (
                       <div className="toolTip">
                         <ul>
-                          {departures.map((d) => (
-                            <li className="toolTip">{d.time}</li>
+                          {departures.map((d, idx) => (
+                            <li className="toolTip" key={idx}>{d.time}</li>
                           ))}
                         </ul>
                       </div>
@@ -114,6 +115,7 @@ class BussStopMarkers extends Component {
                 ) : (
                     <div className="popUpDiv">
                       <img
+                        alt=""
                         src={bussUnavailableIcon}
                         style={{
                           display: "block",

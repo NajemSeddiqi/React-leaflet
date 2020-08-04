@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Map, Marker, Popup, TileLayer } from "react-leaflet";
+import React, { Component, createContext } from "react";
+import { Map, TileLayer } from "react-leaflet";
 import { createRef } from "react";
 import { toast } from "react-toastify";
 import getIcaStores from "../jsondata/icaStores.json";
@@ -7,6 +7,8 @@ import http from "../services/httpService";
 import Stores from "./stores";
 import StoreMarkers from "./storeMarkers";
 import BussStopMarkers from "./bussStopMarkers";
+
+export const MapContext = createContext();
 
 class MyMap extends Component {
   state = {
@@ -26,7 +28,7 @@ class MyMap extends Component {
       openingHours: s.properties.openingHours,
       picUrl: s.properties.picURL,
       website: s.properties.website,
-      focused: false,
+      isFocused: false,
       city: s.properties.city,
       coordinates: s.geometry.coordinates.reverse(),
     }));
@@ -37,8 +39,8 @@ class MyMap extends Component {
     this.setState((prevState) => ({
       data: prevState.data.map((i) =>
         i.coordinates === coordinates
-          ? { ...i, focused: true }
-          : { ...i, focused: false }
+          ? { ...i, isFocused: true }
+          : { ...i, isFocused: false }
       ),
       weather: this.getWeather(coordinates).then((weather) =>
         this.setState({ weather })
@@ -96,7 +98,6 @@ class MyMap extends Component {
   render() {
     const {
       data,
-      weather,
       trafic,
       enabled,
     } = this.state;
@@ -105,13 +106,10 @@ class MyMap extends Component {
       <div className="mapAndList">
         <div className="sideList">
           {/* sfc */}
-          <Stores
-            data={data}
-            weather={weather}
-            enabled={enabled}
-            onFlyTo={this.handleFlyTo}
-            onEnableTraficDetail={this.handleEnableTraficDetail}
-          />
+          {/* Needed many props so decided to use context instead to clean it up */}
+          <MapContext.Provider value={{state: this.state, onFlyTo: this.handleFlyTo, onEnableTraficDetail: this.handleEnableTraficDetail}}>
+            <Stores />
+          </MapContext.Provider>
         </div>
         <div className="leaflet-container">
           <Map ref={this.map} center={[60.50274, 15.41921]} zoom={8}>

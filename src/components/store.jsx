@@ -7,17 +7,20 @@ const Store = ({
   onFlyTo,
   onEnableTraficDetail,
   coordinates,
-  focus,
+  isFocused,
   weather,
   enabled,
+  storeID
 }) => {
-  let titleClassName = !focus ? "unFocused-title" : "focused-title";
+
+  let titleClassName = !isFocused ? "unFocused-title" : "focused-title";
   let traficButtonClassName = !enabled
     ? "traficButtonDisabled"
     : "traficButtonEnabled";
+    
   return (
-    <div key={title} className="sideListDiv">
-      <div key={title}>
+    <div key={storeID} className="sideListDiv">
+      <div>
         {
           <h5 className={titleClassName} onClick={() => onFlyTo(coordinates)}>
             {title}
@@ -26,9 +29,10 @@ const Store = ({
         {<p>{adress}</p>}
         {<p>{openingHours}</p>}
       </div>
-      {focus && (
-        <div>
+      {isFocused && (
+        <div key={storeID}>
           <img
+            alt=""
             className="traficImg"
             src="https://f.nordiskemedier.dk/24lxpprkluqf68lb.jpg"
           />
@@ -40,15 +44,16 @@ const Store = ({
           </button>
         </div>
       )}
-      {focus &&
+      {isFocused &&
         Object.keys(weather)
           .slice(0, 1)
           .map(() => (
-            <div className="weather-div">
+            <div className="weather-div" key={storeID}>
               <span>{`${weather["temp"]}°`}</span>
               <p>{weather["description"]}</p>
               <img
                 src={`http://openweathermap.org/img/w/${weather["icon"]}.png`}
+                alt=""
               ></img>
             </div>
           ))}

@@ -1,14 +1,17 @@
-import React from "react";
+import React, {useContext} from "react";
+import {MapContext} from './map';
 import Store from "./store";
 
-const Stores = ({ onFlyTo, data, weather, enabled, onEnableTraficDetail}) => {
+const Stores = () => {
+  const {state, onFlyTo, onEnableTraficDetail} = useContext(MapContext);
   
   return (
     <div>
-      {data.map((s, idx) => (
+      {state.data.map((s, idx) => (
         <Store
-          focus={s.focused}
+          isFocused={s.isFocused}
           key={idx}
+          storeID={idx}
           title={s.store}
           openingHours={s.openingHours}
           adress={s.adress}
@@ -16,8 +19,8 @@ const Stores = ({ onFlyTo, data, weather, enabled, onEnableTraficDetail}) => {
           onEnableTraficDetail={onEnableTraficDetail}
           city={s.city}
           coordinates={s.coordinates}
-          weather={weather}
-          enabled={enabled}
+          weather={state.weather}
+          enabled={state.enabled}
         />
       ))}
     </div>
