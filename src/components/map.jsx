@@ -13,7 +13,7 @@ class MyMap extends Component {
   state = {
     data: [],
     weather: {},
-    trafic: [],
+    traffic: [],
     enabled: false,   
   };
 
@@ -23,7 +23,7 @@ class MyMap extends Component {
     const stores = getIcaStores.features;
     const data = stores.map((s) => ({
       store: s.properties.store,
-      adress: s.properties.adress,
+      address: s.properties.address,
       openingHours: s.properties.openingHours,
       picUrl: s.properties.picURL,
       website: s.properties.website,
@@ -44,8 +44,8 @@ class MyMap extends Component {
       weather: this.getWeather(coordinates).then((weather) =>
         this.setState({ weather })
       ),
-      trafic: this.getTraficInformation(coordinates).then((trafic) =>
-        this.setState({ trafic })
+      traffic: this.getTrafficInformation(coordinates).then((traffic) =>
+        this.setState({ traffic })
       ),
       enabled: false,
     }));
@@ -53,8 +53,8 @@ class MyMap extends Component {
     this.map.current.leafletElement.flyTo(coordinates, 13);
   };
 
-  handleEnableTraficDetail = () => {
-    if (this.state.trafic === undefined) {
+  handleEnableTrafficDetail = () => {
+    if (this.state.traffic === undefined) {
       toast.error("Det finns för närvarande inga tillgängliga hållplatser.");
     } else {
       this.setState({ enabled: !this.state.enabled });
@@ -77,7 +77,7 @@ class MyMap extends Component {
     } catch (ex) {}
   };
 
-  getTraficInformation = async (coordinates) => {
+  getTrafficInformation = async (coordinates) => {
     let [lat, lng] = coordinates;
     let url = `https://api.resrobot.se/v2/location.nearbystops?key=c4b5de66-b9c7-471f-86cc-289685544c58&originCoordLat=${lat}&originCoordLong=${lng}&format=json`;
     const { data } = await http.get(url);
@@ -95,7 +95,7 @@ class MyMap extends Component {
   render() {
     const {
       data,
-      trafic,
+      traffic,
       enabled,
     } = this.state;
 
@@ -104,7 +104,7 @@ class MyMap extends Component {
         <div className="sideList">
           {/* sfc */}
           {/* Needed many props so decided to use context instead to clean it up */}
-          <MapContext.Provider value={{state: this.state, onFlyTo: this.handleFlyTo, onEnableTraficDetail: this.handleEnableTraficDetail}}>
+          <MapContext.Provider value={{state: this.state, onFlyTo: this.handleFlyTo, onEnableTrafficDetail: this.handleEnableTrafficDetail}}>
             <Stores/>
           </MapContext.Provider>
         </div>
@@ -119,7 +119,7 @@ class MyMap extends Component {
             {/* Component class because it exceeded three methods and definitely required a state */}
             <BussStopMarkers
               enabled={enabled}
-              trafic={trafic}  
+              traffic={traffic}  
             />
           </Map>
         </div>

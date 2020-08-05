@@ -54,7 +54,7 @@ code {
   background-size: cover;
 }
 
-.traficButtonDisabled {
+.trafficButtonDisabled {
   display: inline-block;
   padding: 0.3em 1.2em;
   margin: 0 0.3em 0.3em 0.2em;
@@ -69,7 +69,7 @@ code {
   transition: all 0.2s;
 }
 
-.traficButtonEnabled {
+.trafficButtonEnabled {
   display: inline-block;
   padding: 0.3em 1.2em;
   margin: 0 0.3em 0.3em 0.2em;
@@ -84,15 +84,15 @@ code {
   transition: all 0.2s;
 }
 
-.traficButtonEnabled:hover {
+.trafficButtonEnabled:hover {
   background-color: #4095c6;
 }
 
-.traficButtonDisabled:hover {
+.trafficButtonDisabled:hover {
   background-color: #4095c6;
 }
 
-.traficImg {
+.trafficImg {
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -113,7 +113,7 @@ code {
   justify-content: space-between;
 }
 
-.traficBtns {
+.trafficBtns {
   justify-content: space-between;
 }
 

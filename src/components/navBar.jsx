@@ -7,7 +7,7 @@ class Navbar extends Component {
         <a className="navbar-brand" href="index">
           Store inspicio
         </a>
-        <span className="badge badge-pill badge-secondary"></span>
+        <span className="badge badge-pill badge-secondary"/>
       </nav>
     );
   }

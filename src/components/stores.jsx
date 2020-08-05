@@ -3,7 +3,7 @@ import { MapContext } from "./map";
 import Store from "./store";
 
 const Stores = () => {
-  const { state, onFlyTo, onEnableTraficDetail } = useContext(MapContext);
+  const { state, onFlyTo, onEnableTrafficDetail } = useContext(MapContext);
 
   return (
     <div>
@@ -16,7 +16,7 @@ const Stores = () => {
           openingHours={s.openingHours}
           adress={s.adress}
           onFlyTo={onFlyTo}
-          onEnableTraficDetail={onEnableTraficDetail}
+          onEnableTrafficDetail={onEnableTrafficDetail}
           city={s.city}
           coordinates={s.coordinates}
           weather={state.weather}

@@ -46,15 +46,15 @@ class BussStopMarkers extends Component {
   };
 
   render() {
-    const { trafic, enabled } = this.props;
+    const { traffic, enabled } = this.props;
     const { departures, index, isHovering } = this.state;
     const bussStopIcon = L.icon({ iconUrl: bussIcon, iconSize: [30, 35] });
     const firstIndex = index === 0;
     const lastIndex = index === departures.length - 1;
     return (
       <React.Fragment>
-        {enabled && trafic !== undefined
-          ? trafic.map((pos, idx) => (
+        {enabled && traffic !== undefined
+          ? traffic.map((pos, idx) => (
             <Marker
               key={idx}
               position={pos.coordinates}

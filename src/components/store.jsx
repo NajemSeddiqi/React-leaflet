@@ -3,9 +3,9 @@ import React from "react";
 const Store = ({
   title,
   openingHours,
-  adress,
+  address,
   onFlyTo,
-  onEnableTraficDetail,
+  onEnableTrafficDetail,
   coordinates,
   isFocused,
   weather,
@@ -14,9 +14,9 @@ const Store = ({
 }) => {
 
   let titleClassName = !isFocused ? "unFocused-title" : "focused-title";
-  let traficButtonClassName = !enabled
-    ? "traficButtonDisabled"
-    : "traficButtonEnabled";
+  let trafficButtonClassName = !enabled
+    ? "trafficButtonDisabled"
+    : "trafficButtonEnabled";
     
   return (
     <div key={storeID} className="sideListDiv">
@@ -26,19 +26,19 @@ const Store = ({
             {title}
           </h5>
         }
-        {<p>{adress}</p>}
+        {<p>{address}</p>}
         {<p>{openingHours}</p>}
       </div>
       {isFocused && (
         <div key={storeID}>
           <img
             alt=""
-            className="traficImg"
+            className="trafficImg"
             src="https://f.nordiskemedier.dk/24lxpprkluqf68lb.jpg"
           />
           <button
-            className={traficButtonClassName}
-            onClick={() => onEnableTraficDetail()}
+            className={trafficButtonClassName}
+            onClick={() => onEnableTrafficDetail()}
           >
             Hållplatser
           </button>
@@ -54,7 +54,7 @@ const Store = ({
               <img
                 src={`http://openweathermap.org/img/w/${weather["icon"]}.png`}
                 alt=""
-              ></img>
+              />
             </div>
           ))}
     </div>
