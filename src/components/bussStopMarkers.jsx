@@ -6,6 +6,7 @@ import bussIcon from "../common/bussStopIcon.png";
 import bussAvailableIcon from "../common/bussAvailable.png";
 import bussUnavailableIcon from "../common/bussUnavailable.png";
 
+
 class BussStopMarkers extends Component {
   state = {
     departures: [],
@@ -97,7 +98,7 @@ class BussStopMarkers extends Component {
                       <button
                         className="departurePopUpBtn"
                         onClick={() => this.handlePrevDeparture()}
-                        disabled={firstIndex ? true : false}
+                        disabled={firstIndex}
                         style={firstIndex ? {color: "#080808"} : {color: "#FFFFFF"}}
                       >
                         Föregående
@@ -105,7 +106,7 @@ class BussStopMarkers extends Component {
                       <button
                         className="departurePopUpBtn"
                         onClick={() => this.handleNextDeparture()}
-                        disabled={lastIndex ? true : false}
+                        disabled={lastIndex}
                         style={lastIndex ? {color: "#080808"} : {color: "#FFFFFF"}}
                       >
                         Nästa

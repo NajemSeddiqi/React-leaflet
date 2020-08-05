@@ -1,10 +1,10 @@
-import React, {useContext} from "react";
-import {MapContext} from './map';
+import React, { useContext } from "react";
+import { MapContext } from "./map";
 import Store from "./store";
 
 const Stores = () => {
-  const {state, onFlyTo, onEnableTraficDetail} = useContext(MapContext);
-  
+  const { state, onFlyTo, onEnableTraficDetail } = useContext(MapContext);
+
   return (
     <div>
       {state.data.map((s, idx) => (

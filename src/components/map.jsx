@@ -1,7 +1,6 @@
-import React, { Component, createContext } from "react";
-import { Map, TileLayer } from "react-leaflet";
-import { createRef } from "react";
-import { toast } from "react-toastify";
+import React, {Component, createContext, createRef} from "react";
+import {Map, TileLayer} from "react-leaflet";
+import {toast} from "react-toastify";
 import getIcaStores from "../jsondata/icaStores.json";
 import http from "../services/httpService";
 import Stores from "./stores";
@@ -67,7 +66,7 @@ class MyMap extends Component {
     const url = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&units=metric&appid=25f4530d6bd98eb444ce6b94f8db1ef8`;
     const { data } = await http.get(url);
     try {
-      const obj = {
+      return {
         id: data.id,
         temp: data.main.temp,
         humidity: data.main.humidity,
@@ -75,7 +74,6 @@ class MyMap extends Component {
         icon: data.weather[0].icon,
         enabled: false,
       };
-      return obj;
     } catch (ex) {}
   };
 
@@ -84,14 +82,13 @@ class MyMap extends Component {
     let url = `https://api.resrobot.se/v2/location.nearbystops?key=c4b5de66-b9c7-471f-86cc-289685544c58&originCoordLat=${lat}&originCoordLong=${lng}&format=json`;
     const { data } = await http.get(url);
     try {
-      const trafic = data.StopLocation.map((t) => ({
+      return data.StopLocation.map((t) => ({
         id: t.id,
         name: t.name,
         coordinates: [t.lat, t.lon],
         products: t.products,
         weight: t.weight,
       }));
-      return trafic;
     } catch (ex) {}
   };
 
@@ -108,7 +105,7 @@ class MyMap extends Component {
           {/* sfc */}
           {/* Needed many props so decided to use context instead to clean it up */}
           <MapContext.Provider value={{state: this.state, onFlyTo: this.handleFlyTo, onEnableTraficDetail: this.handleEnableTraficDetail}}>
-            <Stores />
+            <Stores/>
           </MapContext.Provider>
         </div>
         <div className="leaflet-container">
@@ -122,7 +119,7 @@ class MyMap extends Component {
             {/* Component class because it exceeded three methods and definitely required a state */}
             <BussStopMarkers
               enabled={enabled}
-              trafic={trafic}
+              trafic={trafic}  
             />
           </Map>
         </div>
