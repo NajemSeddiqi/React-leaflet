@@ -10,14 +10,13 @@ const Store = ({
   isFocused,
   weather,
   enabled,
-  storeID
+  storeID,
 }) => {
-
   let titleClassName = !isFocused ? "unFocused-title" : "focused-title";
   let trafficButtonClassName = !enabled
     ? "trafficButtonDisabled"
     : "trafficButtonEnabled";
-    
+
   return (
     <div key={storeID} className="sideListDiv">
       <div>

@@ -4,16 +4,15 @@ import Navbar from "./components/navBar";
 import Footer from "./components/footer";
 import MyMap from "./components/map";
 import "./App.css";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 class App extends Component {
-  
   render() {
     return (
       <React.Fragment>
-        <ToastContainer/>
+        <ToastContainer />
         <Navbar />
-        <MyMap/>
+        <MyMap />
         <Footer />
       </React.Fragment>
     );

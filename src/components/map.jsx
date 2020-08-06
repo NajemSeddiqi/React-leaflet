@@ -1,6 +1,6 @@
-import React, {Component, createContext, createRef} from "react";
-import {Map, TileLayer} from "react-leaflet";
-import {toast} from "react-toastify";
+import React, { Component, createContext, createRef } from "react";
+import { Map, TileLayer } from "react-leaflet";
+import { toast } from "react-toastify";
 import getIcaStores from "../jsondata/icaStores.json";
 import http from "../services/httpService";
 import Stores from "./stores";
@@ -14,7 +14,7 @@ class MyMap extends Component {
     data: [],
     weather: {},
     traffic: [],
-    enabled: false,   
+    enabled: false,
   };
 
   map = createRef();
@@ -93,19 +93,21 @@ class MyMap extends Component {
   };
 
   render() {
-    const {
-      data,
-      traffic,
-      enabled,
-    } = this.state;
+    const { data, traffic, enabled } = this.state;
 
     return (
       <div className="mapAndList">
         <div className="sideList">
           {/* sfc */}
           {/* Needed many props so decided to use context instead to clean it up */}
-          <MapContext.Provider value={{state: this.state, onFlyTo: this.handleFlyTo, onEnableTrafficDetail: this.handleEnableTrafficDetail}}>
-            <Stores/>
+          <MapContext.Provider
+            value={{
+              state: this.state,
+              onFlyTo: this.handleFlyTo,
+              onEnableTrafficDetail: this.handleEnableTrafficDetail,
+            }}
+          >
+            <Stores />
           </MapContext.Provider>
         </div>
         <div className="leaflet-container">
@@ -117,10 +119,7 @@ class MyMap extends Component {
             {/* Sfc */}
             <StoreMarkers data={data} />
             {/* Component class because it exceeded three methods and definitely required a state */}
-            <BussStopMarkers
-              enabled={enabled}
-              traffic={traffic}  
-            />
+            <BussStopMarkers enabled={enabled} traffic={traffic} />
           </Map>
         </div>
       </div>

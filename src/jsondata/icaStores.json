@@ -1,187 +1,157 @@
 {
-    "type": "FeatureCollection",
-    "features": [
-        {
-            "type": "Feature",
-            "properties": {
-                "store": "Ica Nära Gagnefhallen",
-                "picURL": "http://media.tidningar.sveagruppen.se/sites/2/2015/09/Ica-Gagnefshallen-4096x2723.jpg",
-                "address": "Tyskens Väg 2, 785 30 Gagnef",
-                "openingHours": "Vardagar: 08-20 Lördag: 08-20 Söndag: 10-20",
-                "website": "https://www.ica.se/butiker/nara/gagnef/ica-nara-gagnefhallen-603/start/",
-                "city": "gagnef"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    15.08194,
-                    60.59588
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "store": "Ica Nära Djurås",
-                "picURL": "https://bildix.mmcloud.se/bildix/api/images/1SLsj_FMu7Lp9qDGfspKkb12QzY.jpeg?fit=crop&w=1200",
-                "address": "Södra Industrivägen 8, 785 61 Djurås",
-                "openingHours": "Vardagar: 07-20 Helger: 08-20",
-                "website": "https://www.ica.se/butiker/supermarket/gagnef/ica-supermarket-djuras-606/start/",
-                "city": "gagnef"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    15.14043,
-                    60.58108
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "store": "ICA Supermarket Kvarnen",
-                "picURL": "http://www.babycard.se/assets/images/logotypes/ica-supermarket-kvarnen-1364-bc-bild.1.png",
-                "address": "Kvarnforsgatan 2, 784 66 Borlänge",
-                "openingHours": "Alla dagar: 08-21",
-                "website": "https://www.ica.se/butiker/supermarket/borlange/ica-supermarket-kvarnen-borlange-657/start/",
-                "city": "borlänge"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    15.41646,
-                    60.53721
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "store": "ICA Supermarket Kupolen",
-                "picURL": "https://kampanj.mittmedia.se/wp-content/uploads/2016/03/icakupolen_nyoppning-640x447.jpg",
-                "address": "Kupolen 1, 781 70 Borlänge",
-                "openingHours": "Vardagar: 07-22 Helger: 09-22",
-                "website": "https://www.ica.se/butiker/supermarket/borlange/ica-supermarket-kupolen-658/start/",
-                "city": "borlänge"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    15.41921,
-                    60.50274
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "store": "ICA Maxi Stormarknad Falun",
-                "picURL": "https://www.dagensmedicin.se/contentassets/74b50a2324d443198bc60d9b980f8a81/ica-maxi-umea.jpg?w\u003d260\u0026scale\u003dboth.jpg",
-                "address": "Bataljonsvägen 11, 791 40 Falun",
-                "openingHours": "Alla dagar: 07-23",
-                "website": "https://www.ica.se/butiker/maxi/falun/maxi-ica-stormarknad-falun-12310/start/",
-                "city": "falun"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    15.66502,
-                    60.62759
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "store": "ICA Nära Gustafs",
-                "picURL": "https://bildix.mmcloud.se/bildix/api/images/kR_rfFI_HfF6VviNfrRT432qO-M.jpeg?fit=crop&w=300",
-                "address": "Jaansvägen 2, 783 50 Gustafs",
-                "openingHours": "Vardagar: 09-20 Helger: 09-18",
-                "website": "https://www.ica.se/butiker/nara/sater/ica-nara-gustafs-674/start/",
-                "city": "säter"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    15.58949,
-                    60.42692
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "store": "ICA Supermarket Mathyttan",
-                "picURL": "https://bildix.mmcloud.se/bildix/api/images/005fbceb37e034c73807901478cc0a102900958b.jpg?fit=crop&w=300",
-                "address": "Hyttgatan 5, 776 71 Långshyttan",
-                "openingHours": "Alla dagar: 08-20",
-                "website": "https://www.ica.se/butiker/supermarket/hedemora/ica-supermarket-mathyttan-3570/start/",
-                "city": "hedemora"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    16.03856,
-                    60.47433
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "store": "ICA Supermarket Hedemora",
-                "picURL": "http://fillit.se/wp-content/uploads/2015/06/unnamed2.jpg",
-                "address": "Åkargatan 11, 776 30 Hedemora",
-                "openingHours": "Alla dagar: 07-22",
-                "website": "https://www.ica.se/butiker/supermarket/hedemora/ica-supermarket-hedemora-9897/start/",
-                "city": "hedemora"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    15.99461,
-                    60.29448
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "store": "ICA Kvantum Avesta",
-                "picURL": "http://platverkstan.com/Image/89274/3311/1916/DSC_0448%20(2).JPG",
-                "address": "Myntgatan 3, 774 30 Avesta",
-                "openingHours": "Alla dagar: 06:30-23",
-                "website": "https://www.ica.se/butiker/kvantum/avesta/ica-kvantum-avesta-13713/start/",
-                "city": "avesta"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    16.17040,
-                    60.16903
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "store": "ICA Nära Fors",
-                "picURL": "http://asgarn.se/wp-content/uploads/2014/10/2014-10-17-12.11.18-1024x768.jpg",
-                "address": "Bruksvägen 14, 774 97 Fors",
-                "openingHours": "Alla dagar: 08-20",
-                "website": "https://www.ica.se/fors/",
-                "city": "fors"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    16.31596,
-                    60.22636
-                ]
-            }
-        },
-         {
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "store": "Ica Nära Gagnefhallen",
+        "picURL": "http://media.tidningar.sveagruppen.se/sites/2/2015/09/Ica-Gagnefshallen-4096x2723.jpg",
+        "address": "Tyskens Väg 2, 785 30 Gagnef",
+        "openingHours": "Vardagar: 08-20 Lördag: 08-20 Söndag: 10-20",
+        "website": "https://www.ica.se/butiker/nara/gagnef/ica-nara-gagnefhallen-603/start/",
+        "city": "gagnef"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [15.08194, 60.59588]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "store": "Ica Nära Djurås",
+        "picURL": "https://bildix.mmcloud.se/bildix/api/images/1SLsj_FMu7Lp9qDGfspKkb12QzY.jpeg?fit=crop&w=1200",
+        "address": "Södra Industrivägen 8, 785 61 Djurås",
+        "openingHours": "Vardagar: 07-20 Helger: 08-20",
+        "website": "https://www.ica.se/butiker/supermarket/gagnef/ica-supermarket-djuras-606/start/",
+        "city": "gagnef"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [15.14043, 60.58108]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "store": "ICA Supermarket Kvarnen",
+        "picURL": "http://www.babycard.se/assets/images/logotypes/ica-supermarket-kvarnen-1364-bc-bild.1.png",
+        "address": "Kvarnforsgatan 2, 784 66 Borlänge",
+        "openingHours": "Alla dagar: 08-21",
+        "website": "https://www.ica.se/butiker/supermarket/borlange/ica-supermarket-kvarnen-borlange-657/start/",
+        "city": "borlänge"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [15.41646, 60.53721]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "store": "ICA Supermarket Kupolen",
+        "picURL": "https://kampanj.mittmedia.se/wp-content/uploads/2016/03/icakupolen_nyoppning-640x447.jpg",
+        "address": "Kupolen 1, 781 70 Borlänge",
+        "openingHours": "Vardagar: 07-22 Helger: 09-22",
+        "website": "https://www.ica.se/butiker/supermarket/borlange/ica-supermarket-kupolen-658/start/",
+        "city": "borlänge"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [15.41921, 60.50274]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "store": "ICA Maxi Stormarknad Falun",
+        "picURL": "https://www.dagensmedicin.se/contentassets/74b50a2324d443198bc60d9b980f8a81/ica-maxi-umea.jpg?w\u003d260\u0026scale\u003dboth.jpg",
+        "address": "Bataljonsvägen 11, 791 40 Falun",
+        "openingHours": "Alla dagar: 07-23",
+        "website": "https://www.ica.se/butiker/maxi/falun/maxi-ica-stormarknad-falun-12310/start/",
+        "city": "falun"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [15.66502, 60.62759]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "store": "ICA Nära Gustafs",
+        "picURL": "https://bildix.mmcloud.se/bildix/api/images/kR_rfFI_HfF6VviNfrRT432qO-M.jpeg?fit=crop&w=300",
+        "address": "Jaansvägen 2, 783 50 Gustafs",
+        "openingHours": "Vardagar: 09-20 Helger: 09-18",
+        "website": "https://www.ica.se/butiker/nara/sater/ica-nara-gustafs-674/start/",
+        "city": "säter"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [15.58949, 60.42692]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "store": "ICA Supermarket Mathyttan",
+        "picURL": "https://bildix.mmcloud.se/bildix/api/images/005fbceb37e034c73807901478cc0a102900958b.jpg?fit=crop&w=300",
+        "address": "Hyttgatan 5, 776 71 Långshyttan",
+        "openingHours": "Alla dagar: 08-20",
+        "website": "https://www.ica.se/butiker/supermarket/hedemora/ica-supermarket-mathyttan-3570/start/",
+        "city": "hedemora"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [16.03856, 60.47433]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "store": "ICA Supermarket Hedemora",
+        "picURL": "http://fillit.se/wp-content/uploads/2015/06/unnamed2.jpg",
+        "address": "Åkargatan 11, 776 30 Hedemora",
+        "openingHours": "Alla dagar: 07-22",
+        "website": "https://www.ica.se/butiker/supermarket/hedemora/ica-supermarket-hedemora-9897/start/",
+        "city": "hedemora"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [15.99461, 60.29448]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "store": "ICA Kvantum Avesta",
+        "picURL": "http://platverkstan.com/Image/89274/3311/1916/DSC_0448%20(2).JPG",
+        "address": "Myntgatan 3, 774 30 Avesta",
+        "openingHours": "Alla dagar: 06:30-23",
+        "website": "https://www.ica.se/butiker/kvantum/avesta/ica-kvantum-avesta-13713/start/",
+        "city": "avesta"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [16.1704, 60.16903]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "store": "ICA Nära Fors",
+        "picURL": "http://asgarn.se/wp-content/uploads/2014/10/2014-10-17-12.11.18-1024x768.jpg",
+        "address": "Bruksvägen 14, 774 97 Fors",
+        "openingHours": "Alla dagar: 08-20",
+        "website": "https://www.ica.se/fors/",
+        "city": "fors"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [16.31596, 60.22636]
+      }
+    },
+    {
       "type": "Feature",
       "properties": {
         "store": "Ica Supermarket",
@@ -193,10 +163,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          15.817329883575438,
-          61.37644941671796
-        ]
+        "coordinates": [15.817329883575438, 61.37644941671796]
       }
     },
     {
@@ -211,10 +178,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          16.064329147338867,
-          61.345272018699305
-        ]
+        "coordinates": [16.064329147338867, 61.345272018699305]
       }
     },
     {
@@ -229,10 +193,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          16.169525384902954,
-          61.71774231077379
-        ]
+        "coordinates": [16.169525384902954, 61.71774231077379]
       }
     },
     {
@@ -247,10 +208,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          17.116398811340332,
-          61.742956266560114
-        ]
+        "coordinates": [17.116398811340332, 61.742956266560114]
       }
     }
   ]

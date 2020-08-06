@@ -12,7 +12,7 @@ const StoreMarkers = ({ data }) => {
         <Marker key={idx} position={pos.coordinates} icon={storeIcon}>
           <Popup>
             <div className="popUpDiv">
-              <img className="storeImg" src={pos.picUrl} alt=""/>
+              <img className="storeImg" src={pos.picUrl} alt="" />
               <br />
               <span>
                 <b>Adress: </b>
