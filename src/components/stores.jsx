@@ -14,7 +14,7 @@ const Stores = () => {
           storeID={idx}
           title={s.store}
           openingHours={s.openingHours}
-          adress={s.adress}
+          address={s.address}
           onFlyTo={onFlyTo}
           onEnableTrafficDetail={onEnableTrafficDetail}
           city={s.city}
