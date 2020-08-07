@@ -13,7 +13,7 @@ class BussStopMarkers extends Component {
     isHovering: false,
   };
 
-  handleDepartureData = async (id) => {
+  getDepartureData = async (id) => {
     let url = `https://api.resrobot.se/v2/departureBoard?key=6e22f881-8d86-4669-8c8d-3eddc81c36c9&id=${id}&maxJourneys=5&format=json`;
     const { data } = await http.get(url);
     try {
@@ -58,7 +58,7 @@ class BussStopMarkers extends Component {
                 key={idx}
                 position={pos.coordinates}
                 icon={bussStopIcon}
-                onclick={() => this.handleDepartureData(pos.id)}
+                onclick={() => this.getDepartureData(pos.id)}
               >
                 <Popup>
                   {departures.length > 0 && departures[index] !== undefined ? (

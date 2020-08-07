@@ -12,9 +12,15 @@ code {
     monospace;
 }
 
+.storeInfo {
+  padding: 0.5em;
+  display: inline;
+}
+
 .popUpDiv {
   margin: 0 auto;
   padding: auto;
+  display: block;
 }
 
 .departurePopUpBtn {
@@ -126,8 +132,9 @@ code {
   padding: 5px;
   border: 1px red solid;
   display: flex;
-  overflow: hidden;
   justify-content: space-between;
+  overflow: hidden;
+  height: 8em;
 }
 
 .sideList {
@@ -163,7 +170,28 @@ code {
 
 .weather-div {
   float: right;
+  text-align: center;
+  display: block;
+  block-size: 9em;
   /* margin-top: -112px; */
+}
+
+.arrow {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  cursor: pointer;
+}
+
+.left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
 }
 
 .focused-title {

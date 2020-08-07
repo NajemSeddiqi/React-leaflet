@@ -51,6 +51,7 @@ class MyMap extends Component {
     }));
     this.map.current.leafletElement.closePopup();
     this.map.current.leafletElement.flyTo(coordinates, 13);
+    console.log(this.state.weather);
   };
 
   handleEnableTrafficDetail = () => {
@@ -63,24 +64,24 @@ class MyMap extends Component {
 
   getWeather = async (coordinates) => {
     const [lat, lng] = coordinates;
-    const url = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&units=metric&appid=25f4530d6bd98eb444ce6b94f8db1ef8`;
-    const { data } = await http.get(url);
+    const URI = `http://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&exclude=hourly&lang=se&units=metric&appid=25f4530d6bd98eb444ce6b94f8db1ef8`;
+    const { data } = await http.get(URI);
     try {
       return {
-        id: data.id,
-        temp: data.main.temp,
-        humidity: data.main.humidity,
-        description: data.weather[0].description,
-        icon: data.weather[0].icon,
-        enabled: false,
+        id: data.current.weather[0].id,
+        temp: data.current.temp,
+        humidity: data.current.humidity,
+        description: data.current.weather[0].description,
+        icon: data.current.weather[0].icon,
+        forecast: [data.daily],
       };
     } catch (ex) {}
   };
 
   getTrafficInformation = async (coordinates) => {
     let [lat, lng] = coordinates;
-    let url = `https://api.resrobot.se/v2/location.nearbystops?key=c4b5de66-b9c7-471f-86cc-289685544c58&originCoordLat=${lat}&originCoordLong=${lng}&format=json`;
-    const { data } = await http.get(url);
+    let URI = `https://api.resrobot.se/v2/location.nearbystops?key=c4b5de66-b9c7-471f-86cc-289685544c58&originCoordLat=${lat}&originCoordLong=${lng}&format=json`;
+    const { data } = await http.get(URI);
     try {
       return data.StopLocation.map((t) => ({
         id: t.id,
@@ -94,7 +95,6 @@ class MyMap extends Component {
 
   render() {
     const { data, traffic, enabled } = this.state;
-
     return (
       <div className="mapAndList">
         <div className="sideList">

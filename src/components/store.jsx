@@ -19,15 +19,9 @@ const Store = ({
 
   return (
     <div key={storeID} className="sideListDiv">
-      <div>
-        {
-          <h5 className={titleClassName} onClick={() => onFlyTo(coordinates)}>
-            {title}
-          </h5>
-        }
-        {<p>{address}</p>}
-        {<p>{openingHours}</p>}
-      </div>
+      <address className={titleClassName} onClick={() => onFlyTo(coordinates)}>
+        <b>{title}</b> <br /> {address} <br /> {openingHours}
+      </address>
       {isFocused && (
         <div key={storeID}>
           <img
@@ -48,12 +42,20 @@ const Store = ({
           .slice(0, 1)
           .map(() => (
             <div className="weather-div" key={storeID}>
-              <span>{`${weather["temp"]}°`}</span>
-              <p>{weather["description"]}</p>
+              <span>
+                <b>{`${weather["temp"]}°`}</b>
+              </span>
+              <br />
+              <b>{weather["description"]}</b>
+              <br />
               <img
                 src={`http://openweathermap.org/img/w/${weather["icon"]}.png`}
                 alt=""
               />
+              <div>
+                <p className="arrow left" />
+                <p className="arrow right" />
+              </div>
             </div>
           ))}
     </div>
