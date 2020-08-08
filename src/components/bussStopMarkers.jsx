@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Marker, Popup } from "react-leaflet";
+import adjacency from "../common/adjacency";
 import L from "leaflet";
 import http from "../services/httpService";
 import bussIcon from "../common/bussStopIcon.png";
@@ -8,7 +9,7 @@ import bussUnavailableIcon from "../common/bussUnavailable.png";
 
 class BussStopMarkers extends Component {
   state = {
-    departures: [],
+    data: [],
     index: 0,
     isHovering: false,
   };
@@ -17,14 +18,14 @@ class BussStopMarkers extends Component {
     let url = `https://api.resrobot.se/v2/departureBoard?key=6e22f881-8d86-4669-8c8d-3eddc81c36c9&id=${id}&maxJourneys=5&format=json`;
     const { data } = await http.get(url);
     try {
-      const departures = data.Departure.map((d) => ({
+      const departureData = data.Departure.map((d) => ({
         operator: d.Product.operator,
         date: d.date,
         time: d.time,
         transportNumber: d.transportNumber,
         stopId: d.stopid,
       }));
-      this.setState({ departures, index: 0 });
+      this.setState({ data: departureData, index: 0 });
     } catch (ex) {}
   };
 
@@ -32,24 +33,12 @@ class BussStopMarkers extends Component {
     this.setState((prevState) => ({ isHovering: !prevState.isHovering }));
   };
 
-  handleNextDeparture = () => {
-    const { index, departures } = this.state;
-    if (index === departures.length - 1) return;
-    this.setState((prevState) => ({ index: prevState.index + 1 }));
-  };
-
-  handlePrevDeparture = () => {
-    const { index } = this.state;
-    if (index === 0) return;
-    this.setState((prevState) => ({ index: prevState.index - 1 }));
-  };
-
   render() {
     const { traffic, enabled } = this.props;
-    const { departures, index, isHovering } = this.state;
+    const { data, index, isHovering } = this.state;
     const bussStopIcon = L.icon({ iconUrl: bussIcon, iconSize: [30, 35] });
     const firstIndex = index === 0;
-    const lastIndex = index === departures.length - 1;
+    const lastIndex = index === data.length - 1;
     return (
       <React.Fragment>
         {enabled && traffic !== undefined
@@ -61,7 +50,7 @@ class BussStopMarkers extends Component {
                 onclick={() => this.getDepartureData(pos.id)}
               >
                 <Popup>
-                  {departures.length > 0 && departures[index] !== undefined ? (
+                  {data.length > 0 && data[index] !== undefined ? (
                     <div className="popUpDiv">
                       <img
                         alt=""
@@ -77,7 +66,7 @@ class BussStopMarkers extends Component {
                       {isHovering && (
                         <div className="toolTip">
                           <ul>
-                            {departures.map((d, idx) => (
+                            {data.map((d, idx) => (
                               <li className="toolTip" key={idx}>
                                 {d.time}
                               </li>
@@ -86,19 +75,19 @@ class BussStopMarkers extends Component {
                         </div>
                       )}
                       <span>
-                        Nästa buss går {departures[index]["date"]} klockan{" "}
+                        Nästa buss går <b>{data[index]["date"]}</b> klockan{" "}
                         <b
                           onMouseEnter={this.handleSpanTimeTouch}
                           onMouseLeave={this.handleSpanTimeTouch}
                         >
-                          {departures[index]["time"]}
+                          {data[index]["time"]}
                         </b>
                       </span>
                       <br />
                       <div className="departurePopUpBtns">
                         <button
                           className="departurePopUpBtn"
-                          onClick={() => this.handlePrevDeparture()}
+                          onClick={() => adjacency.prev(this)}
                           disabled={firstIndex}
                           style={
                             firstIndex
@@ -110,7 +99,7 @@ class BussStopMarkers extends Component {
                         </button>
                         <button
                           className="departurePopUpBtn"
-                          onClick={() => this.handleNextDeparture()}
+                          onClick={() => adjacency.next(this)}
                           disabled={lastIndex}
                           style={
                             lastIndex

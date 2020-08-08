@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import adjacency from "../common/adjacency";
 
 const Store = ({
   title,
@@ -16,6 +17,15 @@ const Store = ({
   let trafficButtonClassName = !enabled
     ? "trafficButtonDisabled"
     : "trafficButtonEnabled";
+
+  const [index, setIndex] = useState(0);
+  const { forecast } = weather;
+
+  let day = "";
+  if (forecast !== undefined) {
+    const date = new Date(forecast[0][index].dt * 1000);
+    day = date.toDateString().substr(0, date.toDateString().length - 4);
+  }
 
   return (
     <div key={storeID} className="sideListDiv">
@@ -43,18 +53,28 @@ const Store = ({
           .map(() => (
             <div className="weather-div" key={storeID}>
               <span>
-                <b>{`${weather["temp"]}°`}</b>
+                <b>{day}</b>
               </span>
               <br />
-              <b>{weather["description"]}</b>
-              <br />
+              <span>
+                <b>{`${forecast[0][index].temp.day}°`}</b>
+              </span>
               <img
-                src={`http://openweathermap.org/img/w/${weather["icon"]}.png`}
+                src={`http://openweathermap.org/img/w/${forecast[0][index].weather[0].icon}.png`}
                 alt=""
               />
+              <br />
+              <b>{forecast[0][index].weather[0].description}</b>
+              <br />
               <div>
-                <p className="arrow left" />
-                <p className="arrow right" />
+                <p
+                  className="arrow left"
+                  onClick={() => adjacency.prev([index, setIndex, forecast[0]])}
+                />
+                <p
+                  className="arrow right"
+                  onClick={() => adjacency.next([index, setIndex, forecast[0]])}
+                />
               </div>
             </div>
           ))}

@@ -51,7 +51,6 @@ class MyMap extends Component {
     }));
     this.map.current.leafletElement.closePopup();
     this.map.current.leafletElement.flyTo(coordinates, 13);
-    console.log(this.state.weather);
   };
 
   handleEnableTrafficDetail = () => {

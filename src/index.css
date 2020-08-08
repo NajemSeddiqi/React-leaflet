@@ -173,6 +173,8 @@ code {
   text-align: center;
   display: block;
   block-size: 9em;
+  width: 10em;
+  height: auto;
   /* margin-top: -112px; */
 }
 
