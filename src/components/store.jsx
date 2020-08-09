@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import adjacency from "../common/adjacency";
 
+/*
+ * function component that is the store in the sidelist
+ * store and weather information display is handled here
+ * traffic information i.e. toggle busstops button is also displayed here
+ * */
 const Store = ({
   title,
   openingHours,

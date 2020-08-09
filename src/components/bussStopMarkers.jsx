@@ -7,6 +7,12 @@ import bussIcon from "../common/bussStopIcon.png";
 import bussAvailableIcon from "../common/bussAvailable.png";
 import bussUnavailableIcon from "../common/bussUnavailable.png";
 
+/*
+ * this class handles the display options of the busstop markers as well as their popup logic
+ * data is departures (5 max)
+ * index is used to toggle next and previous arrival times for each busstop location
+ * isHovering is used for the tooltip that displays all 5 departure times when user is hovering over current arrival time
+ * */
 class BussStopMarkers extends Component {
   state = {
     data: [],
@@ -29,16 +35,17 @@ class BussStopMarkers extends Component {
     } catch (ex) {}
   };
 
-  handleSpanTimeTouch = () => {
+  handleArrivalTimeHover = () => {
     this.setState((prevState) => ({ isHovering: !prevState.isHovering }));
   };
 
   render() {
     const { traffic, enabled } = this.props;
     const { data, index, isHovering } = this.state;
-    const bussStopIcon = L.icon({ iconUrl: bussIcon, iconSize: [30, 35] });
     const firstIndex = index === 0;
     const lastIndex = index === data.length - 1;
+
+    const bussStopIcon = L.icon({ iconUrl: bussIcon, iconSize: [30, 35] });
     return (
       <React.Fragment>
         {enabled && traffic !== undefined
@@ -77,8 +84,8 @@ class BussStopMarkers extends Component {
                       <span>
                         Nästa buss går <b>{data[index]["date"]}</b> klockan{" "}
                         <b
-                          onMouseEnter={this.handleSpanTimeTouch}
-                          onMouseLeave={this.handleSpanTimeTouch}
+                          onMouseEnter={this.handleArrivalTimeHover}
+                          onMouseLeave={this.handleArrivalTimeHover}
                         >
                           {data[index]["time"]}
                         </b>

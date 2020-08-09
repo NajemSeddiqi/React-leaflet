@@ -4,7 +4,6 @@ import Store from "./store";
 
 const Stores = () => {
   const { state, onFlyTo, onEnableTrafficDetail } = useContext(MapContext);
-
   return (
     <div>
       {state.data.map((s, idx) => (

@@ -9,6 +9,11 @@ import BussStopMarkers from "./bussStopMarkers";
 
 export const MapContext = createContext();
 
+/*
+ * this class does most of the heavy lifting in terms of receiving data
+ * componentDidMount gets our store data and sets the state
+ * */
+
 class MyMap extends Component {
   state = {
     data: [],
@@ -34,6 +39,7 @@ class MyMap extends Component {
     this.setState({ data });
   }
 
+  //This method gets weather and traffic data when use clicks on a store in the sideList
   handleFlyTo = (coordinates) => {
     this.setState((prevState) => ({
       data: prevState.data.map((i) =>
@@ -53,18 +59,9 @@ class MyMap extends Component {
     this.map.current.leafletElement.flyTo(coordinates, 13);
   };
 
-  handleEnableTrafficDetail = () => {
-    if (this.state.traffic === undefined) {
-      toast.error("Det finns för närvarande inga tillgängliga hållplatser.");
-    } else {
-      this.setState({ enabled: !this.state.enabled });
-    }
-  };
-
   getWeather = async (coordinates) => {
     const [lat, lng] = coordinates;
-    const URI = `http://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&exclude=hourly&lang=se&units=metric&appid=25f4530d6bd98eb444ce6b94f8db1ef8`;
-    const { data } = await http.get(URI);
+    const { data } = await http.get(http.getWeatherURI(lat, lng));
     try {
       return {
         id: data.current.weather[0].id,
@@ -78,9 +75,8 @@ class MyMap extends Component {
   };
 
   getTrafficInformation = async (coordinates) => {
-    let [lat, lng] = coordinates;
-    let URI = `https://api.resrobot.se/v2/location.nearbystops?key=c4b5de66-b9c7-471f-86cc-289685544c58&originCoordLat=${lat}&originCoordLong=${lng}&format=json`;
-    const { data } = await http.get(URI);
+    const [lat, lng] = coordinates;
+    const { data } = await http.get(http.getTrafficURI(lat, lng));
     try {
       return data.StopLocation.map((t) => ({
         id: t.id,
@@ -90,6 +86,14 @@ class MyMap extends Component {
         weight: t.weight,
       }));
     } catch (ex) {}
+  };
+
+  handleEnableTrafficDetail = () => {
+    if (this.state.traffic === undefined) {
+      toast.error("Det finns för närvarande inga tillgängliga hållplatser.");
+    } else {
+      this.setState({ enabled: !this.state.enabled });
+    }
   };
 
   render() {
