@@ -21,8 +21,7 @@ class BussStopMarkers extends Component {
   };
 
   getDepartureData = async (id) => {
-    let url = `https://api.resrobot.se/v2/departureBoard?key=6e22f881-8d86-4669-8c8d-3eddc81c36c9&id=${id}&maxJourneys=5&format=json`;
-    const { data } = await http.get(url);
+    const { data } = await http.get(http.getDepartureURI(id));
     try {
       const departureData = data.Departure.map((d) => ({
         operator: d.Product.operator,
