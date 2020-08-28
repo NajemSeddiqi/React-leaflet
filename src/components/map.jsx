@@ -1,13 +1,12 @@
 import React, { Component, createContext, createRef } from "react";
 import { Map, TileLayer } from "react-leaflet";
 import { toast } from "react-toastify";
-import getIcaStores from "../jsondata/icaStores.json";
 import http from "../services/httpService";
 import Stores from "./stores";
 import StoreMarkers from "./storeMarkers";
 import BussStopMarkers from "./bussStopMarkers";
 
-export const MapContext = createContext();
+export const MapContext = createContext(undefined, undefined);
 
 /*
  * this class does most of the heavy lifting in terms of receiving data
@@ -25,18 +24,18 @@ class MyMap extends Component {
   map = createRef();
 
   async componentDidMount() {
-    const stores = getIcaStores.features;
-    const data = stores.map((s) => ({
+    const { data } = await http.get(http.getStoreURL());
+    const stores = data._embedded.storeList.map((s) => ({
       store: s.properties.store,
       address: s.properties.address,
       openingHours: s.properties.openingHours,
-      picUrl: s.properties.picURL,
+      picUrl: s.properties.picUrl,
       website: s.properties.website,
       isFocused: false,
       city: s.properties.city,
       coordinates: s.geometry.coordinates.reverse(),
     }));
-    this.setState({ data });
+    this.setState({ data: stores });
   }
 
   //This method gets weather and traffic data when use clicks on a store in the sideList
@@ -61,7 +60,7 @@ class MyMap extends Component {
 
   getWeather = async (coordinates) => {
     const [lat, lng] = coordinates;
-    const { data } = await http.get(http.getWeatherURI(lat, lng));
+    const { data } = await http.get(http.getWeatherURL(lat, lng));
     try {
       return {
         id: data.current.weather[0].id,
@@ -76,7 +75,7 @@ class MyMap extends Component {
 
   getTrafficInformation = async (coordinates) => {
     const [lat, lng] = coordinates;
-    const { data } = await http.get(http.getTrafficURI(lat, lng));
+    const { data } = await http.get(http.getTrafficURL(lat, lng));
     try {
       return data.StopLocation.map((t) => ({
         id: t.id,

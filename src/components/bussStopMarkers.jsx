@@ -21,7 +21,7 @@ class BussStopMarkers extends Component {
   };
 
   getDepartureData = async (id) => {
-    const { data } = await http.get(http.getDepartureURI(id));
+    const { data } = await http.get(http.getDepartureURL(id));
     try {
       const departureData = data.Departure.map((d) => ({
         operator: d.Product.operator,
