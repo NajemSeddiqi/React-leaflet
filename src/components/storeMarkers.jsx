@@ -1,7 +1,7 @@
 import React from "react";
 import { Marker, Popup } from "react-leaflet";
 import L from "leaflet";
-import redIcon from "../common/redIcon.png";
+import redIcon from "../assets/redIcon.png";
 
 const StoreMarkers = ({ data }) => {
   const storeIcon = L.icon({ iconUrl: redIcon, iconSize: [38, 42] });

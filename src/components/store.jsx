@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import adjacency from "../common/adjacency";
+import adjacency from "../services/adjacency";
 
 /*
  * function component that is the store in the sidelist

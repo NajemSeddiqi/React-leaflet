@@ -1,7 +1,10 @@
 import React, { Component, createContext, createRef } from "react";
 import { Map, TileLayer } from "react-leaflet";
 import { toast } from "react-toastify";
-import http from "../services/httpService";
+import { getWeather } from "../services/weatherService";
+import { getTraffic } from "../services/trafficService";
+import { getStores } from "../services/storeService";
+import { buildStoreObject } from "../helpers/storeBuilder";
 import Stores from "./stores";
 import StoreMarkers from "./storeMarkers";
 import BussStopMarkers from "./bussStopMarkers";
@@ -24,17 +27,8 @@ class MyMap extends Component {
   map = createRef();
 
   async componentDidMount() {
-    const { data } = await http.get(http.getStoreURL());
-    const stores = data._embedded.storeList.map((s) => ({
-      store: s.properties.store,
-      address: s.properties.address,
-      openingHours: s.properties.openingHours,
-      picUrl: s.properties.picUrl,
-      website: s.properties.website,
-      isFocused: false,
-      city: s.properties.city,
-      coordinates: s.geometry.coordinates.reverse(),
-    }));
+    const { data } = await getStores();
+    const stores = buildStoreObject(data);
     this.setState({ data: stores });
   }
 
@@ -60,7 +54,7 @@ class MyMap extends Component {
 
   getWeather = async (coordinates) => {
     const [lat, lng] = coordinates;
-    const { data } = await http.get(http.getWeatherURL(lat, lng));
+    const { data } = await getWeather(lat, lng);
     try {
       return {
         id: data.current.weather[0].id,
@@ -75,7 +69,7 @@ class MyMap extends Component {
 
   getTrafficInformation = async (coordinates) => {
     const [lat, lng] = coordinates;
-    const { data } = await http.get(http.getTrafficURL(lat, lng));
+    const { data } = await getTraffic(lat, lng);
     try {
       return data.StopLocation.map((t) => ({
         id: t.id,
@@ -113,7 +107,7 @@ class MyMap extends Component {
           </MapContext.Provider>
         </div>
         <div className="leaflet-container">
-          <Map ref={this.map} center={[60.50274, 15.41921]} zoom={8}>
+          <Map ref={this.map} center={[60.50274, 15.41921]} zoom={7}>
             <TileLayer
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"

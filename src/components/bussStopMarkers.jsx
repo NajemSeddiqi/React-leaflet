@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Marker, Popup } from "react-leaflet";
-import adjacency from "../common/adjacency";
+import { getDepartures } from "../services/trafficService";
+import adjacency from "../services/adjacency";
 import L from "leaflet";
-import http from "../services/httpService";
-import bussIcon from "../common/bussStopIcon.png";
-import bussAvailableIcon from "../common/bussAvailable.png";
-import bussUnavailableIcon from "../common/bussUnavailable.png";
+import bussIcon from "../assets/bussStopIcon.png";
+import bussAvailableIcon from "../assets/bussAvailable.png";
+import bussUnavailableIcon from "../assets/bussUnavailable.png";
 
 /*
  * this class handles the display options of the busstop markers as well as their popup logic
@@ -21,7 +21,7 @@ class BussStopMarkers extends Component {
   };
 
   getDepartureData = async (id) => {
-    const { data } = await http.get(http.getDepartureURL(id));
+    const { data } = await getDepartures(id);
     try {
       const departureData = data.Departure.map((d) => ({
         operator: d.Product.operator,
