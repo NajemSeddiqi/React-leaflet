@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import adjacency from "../services/adjacency";
+import adjacency from "../helpers/adjacency";
 
 /*
  * function component that is the store in the sidelist
@@ -15,11 +15,11 @@ const Store = ({
   coordinates,
   isFocused,
   weather,
-  enabled,
+  isEnabled,
   storeID,
 }) => {
   let titleClassName = !isFocused ? "unFocused-title" : "focused-title";
-  let trafficButtonClassName = !enabled
+  let trafficButtonClassName = !isEnabled
     ? "trafficButtonDisabled"
     : "trafficButtonEnabled";
 

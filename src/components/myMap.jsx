@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { getWeather } from "../services/weatherService";
 import { getTraffic } from "../services/trafficService";
 import { getStores } from "../services/storeService";
-import { buildStoreObject } from "../helpers/storeBuilder";
+import Builder from "../helpers/apiResponseObjectbuilder";
 import Stores from "./stores";
 import StoreMarkers from "./storeMarkers";
 import BussStopMarkers from "./bussStopMarkers";
@@ -20,7 +20,7 @@ class MyMap extends Component {
     data: [],
     weather: {},
     traffic: [],
-    enabled: false,
+    isEnabled: false,
     isLoading: true,
   };
 
@@ -28,9 +28,21 @@ class MyMap extends Component {
 
   async componentDidMount() {
     const { data } = await getStores();
-    const stores = buildStoreObject(data);
+    const stores = Builder.buildStoreObj(data);
     this.setState({ data: stores, isLoading: false });
+
+    const { id } = this.props.match.params;
+    if (id !== undefined) this.setImmediateFocus(id);
   }
+
+  //Is is called if the user comes to this component via the storeList component
+  setImmediateFocus = (id) => {
+    const store = this.state.data.filter((i) => i.id === id)[0];
+    const data = [...this.state.data];
+    const index = data.indexOf(store);
+    data[index].isFocused = !data[index].isFocused;
+    this.handleFlyTo(store.coordinates);
+  };
 
   //This method gets weather and traffic data when use clicks on a store in the sideList
   handleFlyTo = (coordinates) => {
@@ -46,7 +58,7 @@ class MyMap extends Component {
       traffic: this.getTrafficInformation(coordinates).then((traffic) =>
         this.setState({ traffic })
       ),
-      enabled: false,
+      isEnabled: false,
     }));
     this.map.current.leafletElement.closePopup();
     this.map.current.leafletElement.flyTo(coordinates, 13);
@@ -55,42 +67,25 @@ class MyMap extends Component {
   getWeather = async (coordinates) => {
     const [lat, lng] = coordinates;
     const { data } = await getWeather(lat, lng);
-    try {
-      return {
-        id: data.current.weather[0].id,
-        temp: data.current.temp,
-        humidity: data.current.humidity,
-        description: data.current.weather[0].description,
-        icon: data.current.weather[0].icon,
-        forecast: [data.daily],
-      };
-    } catch (ex) {}
+    return Builder.buildWeatherObj(data);
   };
 
   getTrafficInformation = async (coordinates) => {
     const [lat, lng] = coordinates;
     const { data } = await getTraffic(lat, lng);
-    try {
-      return data.StopLocation.map((t) => ({
-        id: t.id,
-        name: t.name,
-        coordinates: [t.lat, t.lon],
-        products: t.products,
-        weight: t.weight,
-      }));
-    } catch (ex) {}
+    return Builder.buildTrafficObj(data);
   };
 
   handleEnableTrafficDetail = () => {
     if (this.state.traffic === undefined) {
       toast.error("Det finns för närvarande inga tillgängliga hållplatser.");
     } else {
-      this.setState({ enabled: !this.state.enabled });
+      this.setState({ isEnabled: !this.state.isEnabled });
     }
   };
 
   render() {
-    const { data, traffic, enabled } = this.state;
+    const { data, traffic, isEnabled } = this.state;
     return (
       <div className="mapAndList">
         <div className="sideList">
@@ -115,7 +110,7 @@ class MyMap extends Component {
             {/* Sfc */}
             <StoreMarkers data={data} />
             {/* Component class because it exceeded three methods and definitely required a state */}
-            <BussStopMarkers enabled={enabled} traffic={traffic} />
+            <BussStopMarkers isEnabled={isEnabled} traffic={traffic} />
           </Map>
         </div>
       </div>

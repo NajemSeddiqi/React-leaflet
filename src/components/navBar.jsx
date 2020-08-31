@@ -8,8 +8,11 @@ class Navbar extends Component {
         <Link className="navbar-brand" to="/">
           Store Inspicio
         </Link>
+        <NavLink className="nav-item nav-link" to="/map">
+          Map <span className="sr-only"></span>
+        </NavLink>
         <NavLink className="nav-item nav-link" to="/stores">
-          Stores <span className="sr-only">(current)</span>
+          Stores <span className="sr-only"></span>
         </NavLink>
       </nav>
     );

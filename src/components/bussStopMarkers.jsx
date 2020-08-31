@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Marker, Popup } from "react-leaflet";
 import { getDepartures } from "../services/trafficService";
-import adjacency from "../services/adjacency";
+import Builder from "../helpers/apiResponseObjectbuilder";
+import adjacency from "../helpers/adjacency";
 import L from "leaflet";
 import bussIcon from "../assets/bussStopIcon.png";
 import bussAvailableIcon from "../assets/bussAvailable.png";
@@ -22,16 +23,8 @@ class BussStopMarkers extends Component {
 
   getDepartureData = async (id) => {
     const { data } = await getDepartures(id);
-    try {
-      const departureData = data.Departure.map((d) => ({
-        operator: d.Product.operator,
-        date: d.date,
-        time: d.time,
-        transportNumber: d.transportNumber,
-        stopId: d.stopid,
-      }));
-      this.setState({ data: departureData, index: 0 });
-    } catch (ex) {}
+    const departureData = Builder.buildDepartureObj(data);
+    this.setState({ data: departureData, index: 0 });
   };
 
   handleArrivalTimeHover = () => {
@@ -39,7 +32,7 @@ class BussStopMarkers extends Component {
   };
 
   render() {
-    const { traffic, enabled } = this.props;
+    const { traffic, isEnabled } = this.props;
     const { data, index, isHovering } = this.state;
     const firstIndex = index === 0;
     const lastIndex = index === data.length - 1;
@@ -47,7 +40,7 @@ class BussStopMarkers extends Component {
     const bussStopIcon = L.icon({ iconUrl: bussIcon, iconSize: [30, 35] });
     return (
       <React.Fragment>
-        {enabled && traffic !== undefined
+        {isEnabled && traffic !== undefined
           ? traffic.map((pos, idx) => (
               <Marker
                 key={idx}

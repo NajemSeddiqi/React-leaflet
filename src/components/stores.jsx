@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { MapContext } from "./map";
+import { MapContext } from "./myMap";
 import Store from "./store";
 
 const Stores = () => {
@@ -20,7 +20,7 @@ const Stores = () => {
             city={s.city}
             coordinates={s.coordinates}
             weather={state.weather}
-            enabled={state.enabled}
+            isEnabled={state.isEnabled}
           />
         ))
       ) : (

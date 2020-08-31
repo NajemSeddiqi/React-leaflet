@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { getStores } from "../services/storeService";
-import { buildStoreObject } from "../helpers/storeBuilder";
+import Builder from "../helpers/apiResponseObjectbuilder";
 import _ from "lodash";
 import StoresTable from "./storesTable";
 import Pagination from "./common/pagination";
@@ -15,7 +15,7 @@ class StoreList extends Component {
 
   async componentDidMount() {
     const { data } = await getStores();
-    const storeList = buildStoreObject(data);
+    const storeList = Builder.buildStoreObj(data);
     this.setState({ stores: storeList });
   }
 
@@ -35,7 +35,7 @@ class StoreList extends Component {
 
   render() {
     const { sortColumn, currentPage, pageSize, stores: items } = this.state;
-    if (items.length === 0) return <p>Det finns inga affärer i databasen.</p>;
+    if (items.length === 0) return <p>Loading...</p>;
 
     const { totalCount, sortedStores: stores } = this.getPagedData();
 
