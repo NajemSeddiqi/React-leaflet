@@ -13,7 +13,6 @@ export const MapContext = createContext(undefined, undefined);
 
 /*
  * this class does most of the heavy lifting in terms of receiving data
- * componentDidMount gets our store data and sets the state
  * */
 
 class MyMap extends Component {
@@ -22,6 +21,7 @@ class MyMap extends Component {
     weather: {},
     traffic: [],
     enabled: false,
+    isLoading: true,
   };
 
   map = createRef();
@@ -29,7 +29,7 @@ class MyMap extends Component {
   async componentDidMount() {
     const { data } = await getStores();
     const stores = buildStoreObject(data);
-    this.setState({ data: stores });
+    this.setState({ data: stores, isLoading: false });
   }
 
   //This method gets weather and traffic data when use clicks on a store in the sideList
