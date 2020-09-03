@@ -12,6 +12,10 @@ code {
     monospace;
 }
 
+.alert {
+  width: 25%;
+}
+
 .form-group {
   padding: 10px;
 }

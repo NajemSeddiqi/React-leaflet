@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { getStores } from "../services/storeService";
 import Builder from "../helpers/apiResponseObjectbuilder";
+import Spinner from "react-bootstrap/Spinner";
 import _ from "lodash";
 import StoresTable from "./storesTable";
 import Pagination from "./common/pagination";
@@ -35,29 +36,38 @@ class StoreList extends Component {
 
   render() {
     const { sortColumn, currentPage, pageSize, stores: items } = this.state;
-    if (items.length === 0) return <p>Loading...</p>;
-
     const { totalCount, sortedStores: stores } = this.getPagedData();
 
     const indexOfLastStore = currentPage * pageSize;
     const indexOfFirstStore = indexOfLastStore - pageSize;
     const currentStore = stores.slice(indexOfFirstStore, indexOfLastStore);
     return (
-      <div className="row">
-        <div className="col">
-          <StoresTable
-            stores={currentStore}
-            sortColumn={sortColumn}
-            onSort={this.handleSort}
-          />
-          <Pagination
-            itemsCount={totalCount}
-            pageSize={pageSize}
-            onPageChange={this.handlePageChange}
-            currentPage={currentPage}
-          />
+      <React.Fragment>
+        <div style={{ height: "80vh" }}>
+          {items.length !== 0 ? (
+            <div className="row">
+              <div className="col">
+                <StoresTable
+                  stores={currentStore}
+                  sortColumn={sortColumn}
+                  onSort={this.handleSort}
+                />
+                <Pagination
+                  itemsCount={totalCount}
+                  pageSize={pageSize}
+                  onPageChange={this.handlePageChange}
+                  currentPage={currentPage}
+                />
+              </div>
+            </div>
+          ) : (
+            <Spinner
+              style={{ padding: "20px", margin: "10px" }}
+              animation="border"
+            />
+          )}
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 }

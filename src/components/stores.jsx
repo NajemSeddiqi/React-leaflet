@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { MapContext } from "./myMap";
+import Spinner from "react-bootstrap/Spinner";
 import Store from "./store";
 
 const Stores = () => {
@@ -48,7 +49,10 @@ const Stores = () => {
             />
           ))
         ) : (
-          <p>Loading...</p>
+          <Spinner
+            style={{ padding: "20px", margin: "10px" }}
+            animation="border"
+          />
         )}
       </div>
     </React.Fragment>

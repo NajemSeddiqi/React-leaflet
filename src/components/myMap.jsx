@@ -27,12 +27,12 @@ class MyMap extends Component {
   map = createRef();
 
   async componentDidMount() {
-    const { data } = await getStores();
-    const stores = Builder.buildStoreObj(data);
-    this.setState({ data: stores, isLoading: false });
-
-    const { id } = this.props.match.params;
-    if (id !== undefined) this.setImmediateFocus(id);
+    console.log(getWeather(60.50274, 15.41921).then((t) => console.log(t)));
+    // const { data } = await getStores();
+    // const stores = Builder.buildStoreObj(data);
+    // this.setState({ data: stores, isLoading: false });
+    // const { id } = this.props.match.params;
+    // if (id !== undefined) this.setImmediateFocus(id);
   }
 
   //Is is called if the user comes to this component via the storeList component
