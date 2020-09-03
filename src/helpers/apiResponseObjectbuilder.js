@@ -1,5 +1,3 @@
-import { toast } from "react-toastify";
-
 function buildStoreObj(data) {
   try {
     return data._embedded.storeList.map((s) => ({

@@ -9,17 +9,19 @@
     "axios": "^0.19.2",
     "bootstrap": "^4.5.2",
     "font-awesome": "^4.7.0",
+    "joi-browser": "^13.4.0",
     "leaflet": "^1.6.0",
+    "lodash": "latest",
     "prettier": "^2.0.5",
+    "prop-types": "latest",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-leaflet": "^2.7.0",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
-    "react-toastify": "^6.0.8",
-    "lodash": "latest",
-    "prop-types": "latest"
+    "react-select": "^3.1.0",
+    "react-toastify": "^6.0.8"
   },
   "scripts": {
     "start": "react-scripts start",

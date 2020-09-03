@@ -37,11 +37,15 @@ class MyMap extends Component {
 
   //Is is called if the user comes to this component via the storeList component
   setImmediateFocus = (id) => {
-    const store = this.state.data.filter((i) => i.id === id)[0];
-    const data = [...this.state.data];
-    const index = data.indexOf(store);
-    data[index].isFocused = !data[index].isFocused;
-    this.handleFlyTo(store.coordinates);
+    try {
+      const store = this.state.data.filter((i) => i.id === id)[0];
+      const data = [...this.state.data];
+      const index = data.indexOf(store);
+      data[index].isFocused = !data[index].isFocused;
+      this.handleFlyTo(store.coordinates);
+    } catch (ex) {
+      toast.error("Ett fel uppstod. Vänligen försök igen.");
+    }
   };
 
   //This method gets weather and traffic data when use clicks on a store in the sideList
@@ -52,16 +56,32 @@ class MyMap extends Component {
           ? { ...i, isFocused: true }
           : { ...i, isFocused: false }
       ),
-      weather: this.getWeather(coordinates).then((weather) =>
-        this.setState({ weather })
-      ),
-      traffic: this.getTrafficInformation(coordinates).then((traffic) =>
-        this.setState({ traffic })
-      ),
+      weather: this.setWeatherState(coordinates),
+      traffic: this.setTrafficState(coordinates),
       isEnabled: false,
     }));
+
+    this.flyToMap(coordinates, 13);
+  };
+
+  flyToMap = (coordinates, zoom) => {
     this.map.current.leafletElement.closePopup();
-    this.map.current.leafletElement.flyTo(coordinates, 13);
+    this.map.current.leafletElement.flyTo(coordinates, zoom);
+  };
+
+  backToCenterView = () => {
+    this.map.current.leafletElement.closePopup();
+    this.map.current.leafletElement.setView([60.50274, 15.41921], 7);
+  };
+
+  setWeatherState = async (coordinates) => {
+    const weather = await this.getWeather(coordinates);
+    return this.setState({ weather });
+  };
+
+  setTrafficState = async (coordinates) => {
+    const traffic = await this.getTrafficInformation(coordinates);
+    return this.setState({ traffic });
   };
 
   getWeather = async (coordinates) => {
@@ -84,8 +104,27 @@ class MyMap extends Component {
     }
   };
 
+  filterByProvince = () => {
+    const { selectedProvince, data: stores } = this.state;
+
+    let filtered = stores;
+    if (selectedProvince) {
+      filtered = stores.filter((s) => s.province.name === selectedProvince);
+    }
+
+    return { data: filtered };
+  };
+
+  handleProvinceSelect = (province) => {
+    this.setState({ selectedProvince: province });
+    this.backToCenterView();
+  };
+
   render() {
-    const { data, traffic, isEnabled } = this.state;
+    const { traffic, isEnabled } = this.state;
+
+    const { data } = this.filterByProvince();
+
     return (
       <div className="mapAndList">
         <div className="sideList">
@@ -94,8 +133,10 @@ class MyMap extends Component {
           <MapContext.Provider
             value={{
               state: this.state,
+              stores: data,
               onFlyTo: this.handleFlyTo,
               onEnableTrafficDetail: this.handleEnableTrafficDetail,
+              onProvinceSelect: this.handleProvinceSelect,
             }}
           >
             <Stores />

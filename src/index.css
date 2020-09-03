@@ -12,6 +12,14 @@ code {
     monospace;
 }
 
+.form-group {
+  padding: 10px;
+}
+
+.form-group input {
+  width: 25%;
+}
+
 .storeInfo {
   padding: 0.5em;
   display: inline;

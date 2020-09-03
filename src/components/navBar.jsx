@@ -4,15 +4,15 @@ import { Link, NavLink } from "react-router-dom";
 class Navbar extends Component {
   render() {
     return (
-      <nav className="navbar navbar-light bg-light">
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <Link className="navbar-brand" to="/">
-          Store Inspicio
+          Store Tracker
         </Link>
-        <NavLink className="nav-item nav-link" to="/map">
-          Map <span className="sr-only"></span>
-        </NavLink>
         <NavLink className="nav-item nav-link" to="/stores">
-          Stores <span className="sr-only"></span>
+          Affärer
+        </NavLink>
+        <NavLink className="nav-item nav-link" to="/suggest">
+          Föreslå en affär
         </NavLink>
       </nav>
     );
