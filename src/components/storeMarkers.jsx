@@ -16,7 +16,7 @@ const StoreMarkers = ({ data }) => {
               <br />
               <span>
                 <b>Adress: </b>
-                {pos.store}
+                {pos.address}
               </span>
               <br />
               <span>

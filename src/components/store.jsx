@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import adjacency from "../helpers/adjacency";
+import useDocumentTitle from "./../hooks/useDocumentTitle";
 
 /*
  * function component that is the store in the sidelist
