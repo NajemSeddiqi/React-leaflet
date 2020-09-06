@@ -8,6 +8,7 @@ import Builder from "../helpers/apiResponseObjectbuilder";
 import Stores from "./stores";
 import StoreMarkers from "./storeMarkers";
 import BussStopMarkers from "./bussStopMarkers";
+import loadProgress from "./../helpers/progressBarLoader";
 
 export const MapContext = createContext(undefined, undefined);
 
@@ -22,12 +23,15 @@ class MyMap extends Component {
     traffic: [],
     isEnabled: false,
     isLoading: true,
+    progress: 0,
   };
 
   map = createRef();
 
   async componentDidMount() {
     document.title = "Store Tracker";
+    loadProgress(this);
+
     const { data } = await getStores();
     const stores = Builder.buildStoreObj(data);
     this.setState({ data: stores, isLoading: false });
@@ -122,7 +126,7 @@ class MyMap extends Component {
   };
 
   render() {
-    const { traffic, isEnabled } = this.state;
+    const { traffic, isEnabled, progress } = this.state;
 
     const { data } = this.filterByProvince();
 
@@ -138,6 +142,7 @@ class MyMap extends Component {
               onFlyTo: this.handleFlyTo,
               onEnableTrafficDetail: this.handleEnableTrafficDetail,
               onProvinceSelect: this.handleProvinceSelect,
+              progress: progress,
             }}
           >
             <Stores />

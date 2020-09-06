@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { MapContext } from "./myMap";
-import Spinner from "react-bootstrap/Spinner";
+import ProgressBar from "react-bootstrap/ProgressBar";
 import Store from "./store";
 
 const Stores = () => {
@@ -10,11 +10,13 @@ const Stores = () => {
     onFlyTo,
     onEnableTrafficDetail,
     onProvinceSelect,
+    progress,
   } = useContext(MapContext);
 
   const options = [
     { value: "Hälsingland", label: "Gävleborg" },
     { value: "Dalarna", label: "Dalarna" },
+    { value: "Stockholms län", label: "Stockholms län" },
   ];
 
   return (
@@ -49,10 +51,9 @@ const Stores = () => {
             />
           ))
         ) : (
-          <Spinner
-            style={{ padding: "20px", margin: "10px" }}
-            animation="border"
-          />
+          <div style={{ margin: "120px" }}>
+            <ProgressBar animated now={progress} label={`${progress}%`} />
+          </div>
         )}
       </div>
     </React.Fragment>

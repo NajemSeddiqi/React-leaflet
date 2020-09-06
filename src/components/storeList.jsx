@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { getStores } from "../services/storeService";
 import Builder from "../helpers/apiResponseObjectbuilder";
-import Spinner from "react-bootstrap/Spinner";
+import ProgressBar from "react-bootstrap/ProgressBar";
 import _ from "lodash";
 import StoresTable from "./storesTable";
 import Pagination from "./common/pagination";
+import loadProgress from "./../helpers/progressBarLoader";
 
 class StoreList extends Component {
   state = {
@@ -12,9 +13,11 @@ class StoreList extends Component {
     sortColumn: { path: "store", order: "asc" },
     pageSize: 13,
     currentPage: 1,
+    progress: 0,
   };
 
   async componentDidMount() {
+    loadProgress(this);
     const { data } = await getStores();
     const storeList = Builder.buildStoreObj(data);
     this.setState({ stores: storeList });
@@ -35,7 +38,13 @@ class StoreList extends Component {
   };
 
   render() {
-    const { sortColumn, currentPage, pageSize, stores: items } = this.state;
+    const {
+      sortColumn,
+      currentPage,
+      pageSize,
+      stores: items,
+      progress,
+    } = this.state;
     const { totalCount, sortedStores: stores } = this.getPagedData();
 
     const indexOfLastStore = currentPage * pageSize;
@@ -61,10 +70,9 @@ class StoreList extends Component {
               </div>
             </div>
           ) : (
-            <Spinner
-              style={{ padding: "20px", margin: "10px" }}
-              animation="border"
-            />
+            <div style={{ margin: "120px" }}>
+              <ProgressBar animated now={progress} label={`${progress}%`} />
+            </div>
           )}
         </div>
       </React.Fragment>
