@@ -30,7 +30,7 @@ class MyMap extends Component {
 
   async componentDidMount() {
     document.title = "Store Tracker";
-    loadProgress(this);
+    loadProgress(this, 13);
 
     const { data } = await getStores();
     const stores = Builder.buildStoreObj(data);

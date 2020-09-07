@@ -17,7 +17,7 @@ class StoreList extends Component {
   };
 
   async componentDidMount() {
-    loadProgress(this);
+    loadProgress(this, 13);
     const { data } = await getStores();
     const storeList = Builder.buildStoreObj(data);
     this.setState({ stores: storeList });
