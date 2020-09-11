@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { Marker, Popup } from "react-leaflet";
 import { getDepartures } from "../services/trafficService";
+import Spinner from "react-bootstrap/Spinner";
 import Builder from "../helpers/apiResponseObjectbuilder";
 import adjacency from "../helpers/adjacency";
 import L from "leaflet";
 import bussIcon from "../assets/bussStopIcon.png";
 import bussAvailableIcon from "../assets/bussAvailable.png";
-import bussUnavailableIcon from "../assets/bussUnavailable.png";
 
 /*
  * this class handles the display options of the busstop markers as well as their popup logic
@@ -34,8 +34,13 @@ class BussStopMarkers extends Component {
   render() {
     const { traffic, isEnabled } = this.props;
     const { data, index, isHovering } = this.state;
-    const firstIndex = index === 0;
-    const lastIndex = index === data.length - 1;
+    let firstIndex;
+    let lastIndex;
+
+    if (data !== undefined) {
+      firstIndex = index === 0;
+      lastIndex = index === data.length - 1;
+    }
 
     const bussStopIcon = L.icon({ iconUrl: bussIcon, iconSize: [30, 35] });
     return (
@@ -49,7 +54,7 @@ class BussStopMarkers extends Component {
                 onclick={() => this.getDepartureData(pos.id)}
               >
                 <Popup>
-                  {data.length > 0 && data[index] !== undefined ? (
+                  {data !== undefined && data.length > 0 ? (
                     <div className="popUpDiv">
                       <img
                         alt=""
@@ -112,20 +117,15 @@ class BussStopMarkers extends Component {
                     </div>
                   ) : (
                     <div className="popUpDiv">
-                      <img
-                        alt=""
-                        src={bussUnavailableIcon}
+                      <Spinner
+                        animation="border"
+                        variant="danger"
                         style={{
                           display: "block",
                           marginLeft: "auto",
                           marginRight: "auto",
                         }}
-                      />{" "}
-                      <br />
-                      <br />
-                      <span>
-                        Det finns inga tilgängliga anländningtider just nu.
-                      </span>
+                      />
                     </div>
                   )}
                 </Popup>

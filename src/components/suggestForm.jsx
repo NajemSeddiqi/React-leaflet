@@ -24,13 +24,15 @@ class SuggestForm extends Form {
   render() {
     return (
       <React.Fragment>
-        <div style={{ height: "80vh" }}>
-          <h1 style={{ padding: "10px" }}>Föreslå nedan</h1>
-          <form onSubmit={this.handleSubmit}>
-            {this.renderInput("store", "Affärsnamn")}
-            {this.renderInput("address", "Adress")}
-            {this.renderButton("Föreslå")}
-          </form>
+        <div className="container mr-3">
+          <div style={{ height: "80vh" }}>
+            <h1 style={{ padding: "10px" }}>Föreslå nedan</h1>
+            <form onSubmit={this.handleSubmit}>
+              {this.renderInput("store", "Affärsnamn")}
+              {this.renderInput("address", "Adress")}
+              {this.renderButton("Föreslå")}
+            </form>
+          </div>
         </div>
       </React.Fragment>
     );
