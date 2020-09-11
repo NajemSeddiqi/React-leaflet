@@ -19,6 +19,8 @@ const Stores = () => {
     { value: "Stockholms län", label: "Stockholms län" },
   ];
 
+  let lbl = Math.floor(progress);
+
   return (
     <React.Fragment>
       <div>
@@ -52,7 +54,7 @@ const Stores = () => {
           ))
         ) : (
           <div style={{ margin: "120px" }}>
-            <ProgressBar animated now={progress} label={`${progress}%`} />
+            <ProgressBar animated now={progress} label={`${lbl}%`} />
           </div>
         )}
       </div>

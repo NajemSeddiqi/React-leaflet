@@ -50,6 +50,8 @@ class StoreList extends Component {
     const indexOfLastStore = currentPage * pageSize;
     const indexOfFirstStore = indexOfLastStore - pageSize;
     const currentStore = stores.slice(indexOfFirstStore, indexOfLastStore);
+
+    let lbl = Math.floor(progress);
     return (
       <React.Fragment>
         <div style={{ height: "80vh" }}>
@@ -71,7 +73,7 @@ class StoreList extends Component {
             </div>
           ) : (
             <div style={{ margin: "120px" }}>
-              <ProgressBar animated now={progress} label={`${progress}%`} />
+              <ProgressBar animated now={progress} label={`${lbl}%`} />
             </div>
           )}
         </div>
